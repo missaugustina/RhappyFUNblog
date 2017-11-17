@@ -1,0 +1,190 @@
+---
+title: What exactly is data science anyways?
+author: Auggy
+date: '2017-11-16'
+slug: what-exactly-is-data-science-anyways
+categories:
+  - meta
+tags: []
+params:
+  data_folder: "../../data/what-exactly-is-data-science-anyways"
+---
+
+```{r includes, message=FALSE, include=FALSE}
+library(dplyr)
+library(feedeR)
+library(ggplot2)
+library(ggthemes)
+library(httr)
+library(readr)
+library(rvest)
+library(scales)
+library(stringr)
+library(tidyr)
+library(tidytext)
+library(tidyverse)
+library(wordcloud)
+```
+
+Once upon a time there was a little girl with a big personality and an even bigger imagination. Attracted to the weird and unusual, she preferred her own intuitions to inflexible instructions and always asked adults hard questions (but, why!?).  Fast-forward to adulthood and it's no wonder I ended up in data science.
+
+Like "DevOps" several years before it, "Data Science" has become yet another trendy, ambiguous tech industry term. What I find intriguing is that "Data Science" is a tech industry term that expands beyond the traditional boundaries of the technology industry.
+
+Depending on who you ask, a "Data Scientist" means something different.
+
+So, what do Data Scientists do, exactly?
+
+According to the O'Reilly Data Science Salary Survey (2016), data scientists do a lot of things!
+
+```{r oreilly_survey, echo=FALSE}
+
+tasks <- read_csv('
+.05,Developing hardware
+.19,Using dashboards and spreadsheets made by others
+.19,Developing products w/ real-time data analytics
+.20,Developing data analytics software
+.24,Setting up / maintaining data platforms
+.28,Communicating w/ people outside company
+.29,ETL
+.30,Developing dashboards
+.30,Planning large software projects or data systems
+.31,Teaching / training others
+.32,Collaborating on code projects using git
+.36,Implementing models / algorithms into production
+.39,Organizing and guiding team projects
+.43,Developing prototype models
+.43,Feature extraction
+.47,Identifying business problems for analytics
+.49,Creating visualizations
+.53,Data cleaning
+.58,Communicate findings to decision-makers
+.61,Data analysis for research questions
+.69,Basic exploratory data analysis
+', col_names=c("percent","task"))
+
+
+ggplot(tasks, aes(x=reorder(task, percent), y=percent)) +
+  geom_bar(stat="identity", show.legend = FALSE) +
+  theme_few() +
+  labs(title="O'Reilly Data Science Survey 2016: Tasks", x="", y="Share of Respondents") +
+  scale_y_continuous(labels = percent) +
+  coord_flip()
+```
+
+Kaggle also did a survey and provided the results as an open dataset.
+
+https://www.kaggle.com/kaggle/kaggle-survey-2017/downloads/freeformResponses.csv
+https://www.kaggle.com/kaggle/kaggle-survey-2017/downloads/conversionRates.csv
+
+According to the distribution of respondants, many appear to come from a computer science background which may contribute to this perception of data science.
+
+What can job postings tell us? When companies are looking to hire data scientists, what terms are they using? Stack Overflow's job postings appear to also have a tech-centric view of data scientists.
+
+```{r so_jobs_download, echo=FALSE, eval=FALSE}
+so_jobs_rss <- read_xml("https://stackoverflow.com/jobs/feed?q=data+scientist")
+
+so_jobs_title <- so_jobs_rss %>% 
+  html_nodes("title") %>%
+  html_text %>%
+  as_data_frame() %>%
+  rename(title=value) %>%
+  filter(title != "data scientist jobs - Stack Overflow")
+
+so_jobs_desc <- so_jobs_rss %>% 
+  html_nodes("description") %>%
+  html_text %>%
+  as_data_frame() %>%
+  rename(description=value) %>%
+  filter(description != "data scientist jobs - Stack Overflow")
+
+so_jobs <- bind_cols(so_jobs_title, so_jobs_desc)
+
+write_csv(so_jobs, paste(params$data_folder, "so_jobs.csv", sep="/"))
+```
+
+```{r stack_overflow_jobs, warning=FALSE, message=FALSE, echo=FALSE}
+so_jobs <- read_csv(paste(params$data_folder, "so_jobs.csv", sep="/"))
+
+# strip out html
+so_jobs <- so_jobs %>%
+  mutate(description=str_replace_all(description, "<.*?>|&nbsp;", " "),
+         description=str_replace_all(description, "&rsquo;", "'"),
+         description=str_replace_all(description, "&amp;", "&"))
+
+tidy_job_titles <- so_jobs %>% 
+  select(title) %>%
+  mutate(title=str_replace_all(title, "\\(.*?\\)", "")) %>%
+  mutate(line=row_number()) %>% 
+  unnest_tokens(word,title)
+
+tidy_job_titles_top <- tidy_job_titles %>%
+  anti_join(stop_words) %>%
+  count(word, sort = TRUE) %>%
+  mutate(word=reorder(word,n))
+
+wordcloud(tidy_job_titles_top$word, tidy_job_titles_top$n, c(5,1), colors=tidy_job_titles_top$n, min.freq = 10)
+
+tidy_jobs <- so_jobs %>% 
+  mutate(line=row_number()) %>% 
+  unnest_tokens(word,description)
+
+tidy_jobs_top <- tidy_jobs %>%
+  anti_join(stop_words) %>%
+  count(word, sort = TRUE) %>%
+  top_n(200) %>%
+  mutate(word=reorder(word,n))
+
+wordcloud(tidy_jobs_top$word, tidy_jobs_top$n, c(8,.5), colors=tidy_jobs_top$n)
+
+```
+
+
+It is naive to assume that these tech-centric sources are the only perspectives worth considering when seeking to define the elusive Data Scientist. The R community hosts several conferences with useR being one of the major ones that bring R users together from across the spectrum.
+
+What topics were presented at the last useR conference? Maybe this can give us a better idea of what it means to Science the Data!
+
+useR topics
+
+Meetup.com is a website that provides a platform for coordinating user groups. Using a similar analysis strategy, maybe looking at the topics presented at R meetups can give us more insight into this chameleon of a character.
+
+Meetup Topics
+
+https://www.meetup.com/topics/r-project-for-statistical-computing/
+
+Who exactly *are* data scientists and what is their background? Does one need to have a PhD, Master's Degree, or attend a bootcamp to break into the field?
+
+Survey of educational background of data scientists
+
+Contemplations like this often begin with a literal dictionary definition of the terms they are contemplating. I find ending with this to be more appropriate here because ultimately it shows how meaningless the title "Data Scientist" really is.
+
+"Scientist" and "Science"
+
+These criteria include an organized body of knowledge, a track record of non-obvious discoveries, an experimental method to test hypotheses, and an openness to any hypothesis being falsified. They also include secondary distinctions such as interplay between science and art, and between basic and applied. 
+
+What about "scientist" and "science" in other contexts?
+
+(1) Christian Scientist
+(2) Nonscientist
+(3) Science Fiction
+(4) Weird Science
+
+How does a data scientist differ from a plain ol' scientist? Are the research questions actually about data? What does "Data" really mean?
+
+(1) Information Science
+(2) Library Science
+
+As a thought experiment, I'd like to imagine going back in time in our Tardis and supplanting this vague "Data Scientist" title with something else. Here are some of my ideas:
+
+* Meta Scientist
+
+
+Reader Challenge: What alternative Data Scientist job titles can you think of? Tweet away! to @mmmpork #RhappyFUN #rstats
+
+Cites: 
+
+John King & Roger Magoulas (2016). O'Reilly 2016 Data Science Salary Survey. Retrieved from http://www.oreilly.com/data/free/files/2016-data-science-salary-survey.pdf
+
+https://www.kaggle.com/kaggle/kaggle-survey-2017
+
+
+https://www.wired.com/2007/06/computer_scienc/
