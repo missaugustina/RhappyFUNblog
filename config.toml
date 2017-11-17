@@ -1,0 +1,42 @@
+baseurl = "/"
+languageCode = "en-us"
+title = "R Happy Fun Time!"
+theme = "hugo-lithium-theme"
+googleAnalytics = ""
+disqusShortname = ""
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+
+[permalinks]
+    post = "/:year/:month/:day/:slug/"
+
+[[menu.main]]
+    name = "About"
+    url = "/about/"
+[[menu.main]]
+    name = "GitHub"
+    url = "https://github.com/missaugustina"
+[[menu.main]]
+    name = "LinkedIn"
+    url = "https://www.linkedin.com/in/auggy/"
+[[menu.main]]
+    name = "Twitter"
+    url = "https://twitter.com/mmmpork"
+
+[params]
+    description = "R Happy Fun Time!"
+
+    # options for highlight.js (version, additional languages, and theme)
+    highlightjsVersion = "9.11.0"
+    highlightjsCDN = "//cdn.bootcss.com"
+    highlightjsLang = ["r", "yaml"]
+    highlightjsTheme = "github"
+
+    MathJaxCDN = "//cdn.bootcss.com"
+    MathJaxVersion = "2.7.1"
+
+    [params.logo]
+    url = "logo.png"
+    width = 50
+    height = 50
+    alt = "Logo"
+
