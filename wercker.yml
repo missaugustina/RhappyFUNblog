@@ -16,5 +16,5 @@ build:
           packages: git ssh-client
       - lukevivier/gh-pages:
           token: $GIT_TOKEN
-          domain: hugo-wercker.ig.nore.me
+          domain: todo
           basedir: public
