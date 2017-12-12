@@ -10,3 +10,11 @@ build:
     - arjen/hugo-build:
       prod_branches: test_wercker
       theme: hugo-lithium-theme
+  deploy-staging:
+    steps:
+      - install-packages:
+          packages: git ssh-client
+      - lukevivier/gh-pages:
+          token: $GIT_TOKEN
+          domain: hugo-wercker.ig.nore.me
+          basedir: public
