@@ -15,6 +15,5 @@ build:
       - install-packages:
           packages: git ssh-client
       - lukevivier/gh-pages:
-          token: $GIT_TOKEN
-          domain: todo
+	  token: $GIT_TOKEN
           basedir: public
