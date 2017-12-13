@@ -14,6 +14,7 @@ deploy-staging:
   steps:
     - install-packages:
         packages: git ssh-client
-    - lukevivier/gh-pages@0.2.1:
-        token: $GIT_TOKEN
+    - git-push:
+        gh_auth: $GIT_TOKEN
         basedir: public
+        repo: missaugustina/RhappyFUNstaging
