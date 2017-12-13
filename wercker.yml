@@ -17,5 +17,5 @@ deploy-staging:
     - leipert/git-push:
         gh_oauth: $GIT_TOKEN
         basedir: public
-        repo: missaugustina/RhappyFUNstaging
+        repo: missaugustina/missaugustina.github.io
         branch: master
