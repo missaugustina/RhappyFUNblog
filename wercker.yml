@@ -18,3 +18,4 @@ deploy-staging:
         gh_oauth: $GIT_TOKEN
         basedir: public
         repo: missaugustina/RhappyFUNstaging
+        branch: master
