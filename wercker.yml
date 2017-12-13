@@ -15,6 +15,6 @@ deploy-staging:
     - install-packages:
         packages: git ssh-client
     - leipert/git-push:
-        gh_auth: $GIT_TOKEN
+        gh_oauth: $GIT_TOKEN
         basedir: public
         repo: missaugustina/RhappyFUNstaging
