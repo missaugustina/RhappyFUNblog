@@ -2,7 +2,7 @@
 # Read more about pipelines on our dev center
 # http://devcenter.wercker.com/docs/pipelines/index.html
 box: debian
-build:
+build-site:
     # Steps make up the actions in your pipeline
     # Read more about steps on our dev center:
     # http://devcenter.wercker.com/docs/steps/index.html
@@ -10,10 +10,10 @@ build:
     - arjen/hugo-build:
         prod_branches: test_wercker
         theme: hugo-lithium-theme
-  deploy-staging:
-    steps:
-      - install-packages:
-          packages: git ssh-client
-      - lukevivier/gh-pages:
-          token: $GIT_TOKEN
-          basedir: public
+deploy-staging:
+  steps:
+    - install-packages:
+        packages: git ssh-client
+    - lukevivier/gh-pages:
+        token: $GIT_TOKEN
+        basedir: public
