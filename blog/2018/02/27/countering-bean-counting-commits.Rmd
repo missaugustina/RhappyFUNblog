@@ -150,7 +150,7 @@ tf_google_graph
 
 ![A graph of email addresses used by identified Googlers in the Tensorflow project](img/gh_emails_graph.png)
 
-[Interactive graph available here](gh_emails_graph.html)
+[Interactive graph available here](2018/02/27/gh_emails_graph.html)
 
 ```{r tf_email_domains_network, fig.cap="Use of a Network to Disambiguate Authors and Committers (We identified more Googlers but that's about it)"}
 
