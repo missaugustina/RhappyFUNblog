@@ -126,8 +126,6 @@ $(document).ready(function () {
 </div>
 
 
-<div id="countering-bean-counting-open-source-influence-beyond-commits" class="section level1">
-<h1>Countering Bean Counting: Open Source Influence Beyond Commits</h1>
 <div id="what-is-the-value-of-open-source-engagement" class="section level2">
 <h2>What is the value of open source engagement?</h2>
 <p>Evaluating the effectiveness of open source engagement, whether you are releasing your own code or contributing to other peoples’ projects, is a fairly ambiguous undertaking.</p>
@@ -333,7 +331,7 @@ Organizations having the most Tensorflow Commit Quarters with at least one affil
 </div>
 <div id="engagement-lifetime-commit-interval-sequence" class="section level3">
 <h3>Engagement Lifetime (Commit Interval Sequence)</h3>
-<p>When plotted as a time series, the Commit Intervals illustrated above can also show us how long the organization has been engaged.</p>
+<p>When plotted as a time series, the Commit Intervals illustrated above can also show us how consistently the organization has been engaged.</p>
 <pre class="r"><code># has commits over time period
 ggplot(author_commits_month %&gt;% filter(total_commit_months &gt; 7 &amp; author_domain_type %in% c(&quot;Other&quot;, &quot;Edu&quot;)), 
        aes(x=commit_month, y=has_commits)) + 
@@ -371,7 +369,7 @@ Organizations having the most Quarters with an affiliated commit
 <div id="committer-diversity" class="section level3">
 <h3>Committer Diversity</h3>
 <p>How well is a project doing at Open Governance? An open governance project, ideally, should not have a majority of committers representing one organization. This metric can also be used to demonstrate concerns on projects that have historically been open governance, especially if qualitatively there is a known majority influence.</p>
-<p>The IBM Cognitive Open Technology team recently hosted a Tensorflow panel at the conference Index that featured several key Tensorflow Googlers [<a href="https://developer.ibm.com/opentech/2018/02/03/index-feb-20-ai-open-community-gathering-featuring-tensorflow/" class="uri">https://developer.ibm.com/opentech/2018/02/03/index-feb-20-ai-open-community-gathering-featuring-tensorflow/</a>]. The claim was made that Google was working to diversify the Tensorflow community by increasing non-Google committers.</p>
+<p>The IBM Cognitive Open Technology team recently hosted <a href="https://developer.ibm.com/opentech/2018/02/03/index-feb-20-ai-open-community-gathering-featuring-tensorflow/">a Tensorflow panel at the conference Index</a> that featured several key Tensorflow Googlers. The claim was made that Google was working to diversify the Tensorflow community by increasing non-Google committers.</p>
 <pre class="r"><code>committer_diversity &lt;- readRDS(&quot;data/tf_committer_diversity.Rds&quot;)
 
 ggplot(committer_diversity, 
@@ -423,7 +421,6 @@ Tensorflow Commits by Committer Affiliation - What additional questions might th
 <li><a href="https://rpubs.com/auggy/tensorflow-emails-igraph">Applying a Network to Tensorflow Commit Emails</a></li>
 <li><a href="https://rpubs.com/auggy/tensorflow-emails-diversity">Tensorflow Email Diversity</a></li>
 </ul>
-</div>
 </div>
 
 

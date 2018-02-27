@@ -18,9 +18,6 @@ library(scales)
 library(visNetwork)
 ```
 
-
-# Countering Bean Counting: Open Source Influence Beyond Commits
-
 ## What is the value of open source engagement?
 
 Evaluating the effectiveness of open source engagement, whether you are releasing your own code or contributing to other peoples' projects, is a fairly ambiguous undertaking.
@@ -28,9 +25,9 @@ Evaluating the effectiveness of open source engagement, whether you are releasin
 Traditional methods of evaluation of "engagement success" are tied to easily quantifiable events. In sports, athletes are evaluated by game play rules and physical performance such as how fast, how high, and how many. In sales, you might be measured on customer conversions and monetary sales figures.
 
 Open Source community evaluation is less tied to tangible artifacts and outcomes. "Success" in open source communities involves three key areas: 
-*   Individual Influence (how much am I doing?)
-*   Organization Influence (how important are we to the community?)
-*   Popularity (does anyone care about what we are doing?)
+ * Individual Influence (how much am I doing?)
+ * Organization Influence (how important are we to the community?)
+ * Popularity (does anyone care about what we are doing?)
 
 This is very similar to Research & Development. In R&D, one might evaluate Individual Influence through publications, Organizational Influence through patents and sales of developed products (indirect sales), and Popularity through citations and market share.
 
@@ -231,7 +228,7 @@ ggplot(author_commits_qtr %>%
 
 ### Engagement Lifetime (Commit Interval Sequence)
 
-When plotted as a time series, the Commit Intervals illustrated above can also show us how long the organization has been engaged.
+When plotted as a time series, the Commit Intervals illustrated above can also show us how consistently the organization has been engaged.
 
 ```{r engagement_lifetime_month, fig.height=8, fig.width=10, fig.cap="Organizations having the most months with an affiliated commit"}
 # has commits over time period
@@ -268,7 +265,7 @@ When the identification is essentially X and ~X, then the proportion of committe
 
 How well is a project doing at Open Governance? An open governance project, ideally, should not have a majority of committers representing one organization. This metric can also be used to demonstrate concerns on projects that have historically been open governance, especially if qualitatively there is a known majority influence.
 
-The IBM Cognitive Open Technology team recently hosted a Tensorflow panel at the conference Index that featured several key Tensorflow Googlers [https://developer.ibm.com/opentech/2018/02/03/index-feb-20-ai-open-community-gathering-featuring-tensorflow/]. The claim was made that Google was working to diversify the Tensorflow community by increasing non-Google committers.
+The IBM Cognitive Open Technology team recently hosted [a Tensorflow panel at the conference Index](https://developer.ibm.com/opentech/2018/02/03/index-feb-20-ai-open-community-gathering-featuring-tensorflow/) that featured several key Tensorflow Googlers. The claim was made that Google was working to diversify the Tensorflow community by increasing non-Google committers.
 
 ```{r tf_committers_diversity, fig.height=10, fig.width=10, fig.cap="Unique Tensorflow Committers - This appears to support Google\'s claim"}
 committer_diversity <- readRDS("data/tf_committer_diversity.Rds")
@@ -310,6 +307,8 @@ Commits are not a sufficient single measure of engagement. Other activities must
  * [Identifying Tensorflow Authors + Committers by Email Address](https://rpubs.com/auggy/tensorflow-emails)
  * [Applying a Network to Tensorflow Commit Emails](https://rpubs.com/auggy/tensorflow-emails-igraph)
  * [Tensorflow Email Diversity](https://rpubs.com/auggy/tensorflow-emails-diversity)
+ 
+ 
  
 
 
