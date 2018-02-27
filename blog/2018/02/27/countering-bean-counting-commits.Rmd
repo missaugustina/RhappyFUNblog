@@ -24,7 +24,8 @@ Evaluating the effectiveness of open source engagement, whether you are releasin
 
 Traditional methods of evaluation of "engagement success" are tied to easily quantifiable events. In sports, athletes are evaluated by game play rules and physical performance such as how fast, how high, and how many. In sales, you might be measured on customer conversions and monetary sales figures.
 
-Open Source community evaluation is less tied to tangible artifacts and outcomes. "Success" in open source communities involves three key areas: 
+Open Source community evaluation is less tied to tangible artifacts and outcomes. "Success" in open source communities involves three key areas:
+
  * Individual Influence (how much am I doing?)
  * Organization Influence (how important are we to the community?)
  * Popularity (does anyone care about what we are doing?)
