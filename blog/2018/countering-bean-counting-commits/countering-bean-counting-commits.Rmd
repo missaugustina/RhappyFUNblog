@@ -1,14 +1,36 @@
 ---
 title: 'Countering Bean Counting: Open Source Influence Beyond Commits'
 author: Augustina Ragwitz
-date: '2018-02-27'
 slug: countering-bean-counting-commits
 categories: []
 tags: []
-output: 
-  html_document: 
+date: "`r Sys.Date()`"
+output:
+  rmdformats::html_clean:
+    highlight: kate
+    thumbnails: FALSE
     fig_caption: yes
+    toc_depth: 2
 ---
+
+
+```{r knitr_init, echo=FALSE, cache=FALSE}
+library(knitr)
+library(rmdformats)
+
+## Global options
+options(max.print="75")
+opts_chunk$set(echo=FALSE,
+	             cache=TRUE,
+               prompt=FALSE,
+               tidy=TRUE,
+               comment=NA,
+               message=FALSE,
+               warning=FALSE,
+               fig.path = "img/")
+opts_knit$set(width=75)
+```
+
 
 ```{r includes, include=FALSE}
 library(dplyr)
@@ -82,7 +104,7 @@ The most common method for company identification is either through the domain n
 
 A user committing to a repository using their work email address is the most reliable method of organization affiliation identification. However, accuracy across projects is still a challenge because authors don't always use the same email address and some never use their work email address.
 
-```{r tf_email_domains, fig.cap="Tensorflow - Distribution of Email Domain Types"}
+```{r fig-tensorflow-email-domains, fig.cap="Tensorflow - Distribution of Email Domain Types"}
 
 author_summary <- readRDS("data/tf_author_summary.Rds")
 total_authors <- sum(author_summary$num_authors)
@@ -97,7 +119,7 @@ ggplot(author_summary %>% group_by(author_domain_type) %>% summarize(num_authors
 
 ```
 
-```{r tf_email_domains_pct, fig.cap="Tensorflow - Percent of Authors per Email Domain"}
+```{r fig-tensorflow-email-domains-pct, fig.cap="Tensorflow - Percent of Authors per Email Domain"}
 
 author_summary <- readRDS("data/tf_author_summary.Rds")
 
@@ -112,7 +134,7 @@ ggplot(author_summary %>% filter(round(pct_authors, 2) > 0),
 
 ```
 
-```{r tf_authors_per_email, fig.cap="Tensorflow - Unique Authors per Email Domain - What does this tell us about how engaged organizations are?"}
+```{r fig-tensorflow-authors-per-email, fig.cap="Tensorflow - Unique Authors per Email Domain - What does this tell us about how engaged organizations are?"}
 
 author_summary <- readRDS("data/tf_author_summary.Rds")
 
@@ -129,7 +151,7 @@ ggplot(author_summary %>%
 
 The Human-System Metrics approach to this problem is to develop a complex solution for author affiliation identification in a quest for precision, but only small gains can be had for the large increases in complexity and overhead. A question-driven approach built on proven social science and statistical methods suggests that we do not need precision, as long as we're asking the right questions.
 
-```{r email_network, eval=FALSE}
+```{r fig-tensorflow-email-network-code, eval=FALSE}
 
 # Code to generate the interactive network
 
@@ -150,7 +172,7 @@ tf_google_graph
 
 [Interactive graph available here](2018/02/27/gh_emails_graph.html)
 
-```{r tf_email_domains_network, fig.cap="Use of a Network to Disambiguate Authors and Committers (We identified more Googlers but that's about it)"}
+```{r fig-tensorflow-email-domains-network, fig.cap="Use of a Network to Disambiguate Authors and Committers (We identified more Googlers but that's about it)"}
 
 author_summary_network <- readRDS("data/tf_author_summary_network.Rds")
 ggplot(author_summary_network %>% filter(pct_authors > 0), 
@@ -166,7 +188,7 @@ ggplot(author_summary_network %>% filter(pct_authors > 0),
 
 We know that we can identify at least some affiliations with high certainty. Therefore, the heuristic we'll consider is that if an organization is actively engaged then they will have at least 1 commit with an associated email domain for a given time interval. This heuristic also prevents "gaming" by having members make a lot of erroneous commits to projects to pad their leaderboard position since only 1 will be counted for a given time interval.
 
-```{r num_committers_month, fig.cap="Committers to Tensorflow by Email Domain - We already know these should be mostly Googlers and given the huge proportion of Personal email domains anything else must be significant."}
+```{r fig-tensorflow-num-committers-month, fig.cap="Committers to Tensorflow by Email Domain - We already know these should be mostly Googlers and given the huge proportion of Personal email domains anything else must be significant."}
 
 committers_month <- readRDS("data/committer_month_network.Rds")
 
@@ -189,7 +211,7 @@ When we think about relationships with people, the people we have the strongest 
 
 Specifically this metric measures the frequency of time intervals with at least one commit (eg, Months) and answers the question: How long has the organization been engaged? 
 
-```{r engagement_freq_month, fig.cap="Organizations with more than 6 months of Tensorflow Commit Months with at least one identified affiliated author"}
+```{r fig-tensorflow-engagement-freq-month, fig.cap="Organizations with more than 6 months of Tensorflow Commit Months with at least one identified affiliated author"}
 
 author_commits_month <- 
   readRDS("data/tf_author_commits_month.Rds")
@@ -209,7 +231,7 @@ ggplot(author_commits_month %>%
 ```
 
 
-```{r engagement_freq_qtr, fig.cap="Organizations having the most Tensorflow Commit Quarters with at least one affiliated author"}
+```{r fig-tensorflow-engagement-freq-qtr, fig.cap="Organizations having the most Tensorflow Commit Quarters with at least one affiliated author"}
 
 author_commits_qtr <- 
   readRDS("data/tf_author_commits_qtr.Rds")
@@ -231,7 +253,7 @@ ggplot(author_commits_qtr %>%
 
 When plotted as a time series, the Commit Intervals illustrated above can also show us how consistently the organization has been engaged.
 
-```{r engagement_lifetime_month, fig.height=8, fig.width=10, fig.cap="Organizations having the most months with an affiliated commit"}
+```{r fig-tensorflow-engagement-lifetime-month, fig.height=8, fig.width=10, fig.cap="Organizations having the most months with an affiliated commit"}
 # has commits over time period
 ggplot(author_commits_month %>% filter(total_commit_months > 7 & author_domain_type %in% c("Other", "Edu")), 
        aes(x=commit_month, y=has_commits)) + 
@@ -244,7 +266,7 @@ ggplot(author_commits_month %>% filter(total_commit_months > 7 & author_domain_t
 ```
 
 
-```{r engagement_lifetime_qtr, fig.cap="Organizations having the most Quarters with an affiliated commit"}
+```{r fig-tensorflow-engagement_lifetime_qtr, fig.cap="Organizations having the most Quarters with an affiliated commit"}
 # has commits over time period
 ggplot(author_commits_qtr %>% filter(total_commit_quarters > 4 & author_domain_type %in% c("Other", "Edu")), 
        aes(x=commit_quarter, y=has_commits)) + 
@@ -268,7 +290,7 @@ How well is a project doing at Open Governance? An open governance project, idea
 
 The IBM Cognitive Open Technology team recently hosted [a Tensorflow panel at the conference Index](https://developer.ibm.com/opentech/2018/02/03/index-feb-20-ai-open-community-gathering-featuring-tensorflow/) that featured several key Tensorflow Googlers. The claim was made that Google was working to diversify the Tensorflow community by increasing non-Google committers.
 
-```{r tf_committers_diversity, fig.height=10, fig.width=10, fig.cap="Unique Tensorflow Committers - This appears to support Google\'s claim"}
+```{r fig-tensorflow-committers-diversity, fig.height=10, fig.width=10, fig.cap="Unique Tensorflow Committers - This appears to support Google\'s claim"}
 committer_diversity <- readRDS("data/tf_committer_diversity.Rds")
 
 ggplot(committer_diversity, 
@@ -281,7 +303,7 @@ ggplot(committer_diversity,
   facet_wrap(~ commit_year, scales="free")
 ```
 
-```{r tf_commit_diversity, fig.height=10, fig.width=10, fig.cap="Tensorflow Commits by Committer Affiliation - What additional questions might this raise about Google's claim of committer diversity?"}
+```{r fig-tensorflow-commit-diversity, fig.height=10, fig.width=10, fig.cap="Tensorflow Commits by Committer Affiliation - What additional questions might this raise about Google's claim of committer diversity?"}
 commit_diversity <- readRDS("data/tf_commit_diversity.Rds")
 
 ggplot(commit_diversity, 
