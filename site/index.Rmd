@@ -1,18 +1,13 @@
 ---
-title: "R Happy FUN blog"
 output:
   rmdformats::html_clean:
     highlight: kate
 ---
 
 
-```{r knitr_init, echo=FALSE, cache=FALSE, message=FALSE}
+```{r knitr_init, echo=FALSE, cache=FALSE}
 library(knitr)
 library(rmdformats)
-library(dplyr)
-library(lubridate)
-library(stringr)
-library(tidyr)
 
 ## Global options
 options(max.print="75")
@@ -26,59 +21,9 @@ opts_chunk$set(echo=FALSE,
 opts_knit$set(width=75)
 ```
 
-```{r build_index, include=FALSE}
-if(file.exists("index.Rds")) {
-  curr_site_files <- readRDS("index.Rds")
-  curr_slugs <- readRDS("slugs.Rds")
-} else { # first run or file is missing
-  curr_site_files <- data_frame(slug="", content="", path="")
-  curr_slugs <- data_frame()
-}
+# It's R Happy FUN Time, Y'all!
 
-# recursively list all filenames
-site_files <- data_frame(path=list.dirs(path=".", recursive=TRUE, full.names = FALSE))
-site_files <- site_files %>% 
-  filter(! (path %in% c("","site_libs") | str_detect(path, "_cache"))) %>%
-  separate(path, c("parent", "slug", "content"), sep="/", remove=FALSE)
-
-new_files <- site_files %>%
-  anti_join(curr_site_files)
-
-new_site_files <- bind_rows(new_files, curr_site_files)
-saveRDS(new_site_files, "index.Rds")
-
-# add slugs to index
-slugs_to_add <- new_files %>% 
-  filter(parent == "blog" & !is.na(slug) & is.na(content)) %>%
-  mutate(file_mtime=file.mtime(path), 
-         file_pretty_date=floor_date(file_mtime, "days"),
-         file_year=year(file_mtime),
-         link=paste0("[", file_pretty_date, ": ", slug, "](", path, ")")) %>%
-  arrange(file_mtime)
-
-new_slugs <- bind_rows(slugs_to_add, curr_slugs)
-saveRDS(new_slugs, "slugs.Rds")
-
-slugs_to_print <- new_slugs %>%
-  select(file_year, link) %>%
-  mutate(link=paste0(" * ", link, "\n")) %>%
-  group_by(file_year) %>%
-  nest(.key="links")
-```
-
-```{r, results='asis'}
-
-for (r in 1:nrow(slugs_to_print)) {
-  cat(paste("##",slugs_to_print$file_year[[r]], "\n\n"))
-  cat(paste(unlist(slugs_to_print$links[[r]]), collapse=""), "\n")
-}
-
-```
-
-
-
-
-
-
-
+ * [Twitter](http://www.twitter.com/mmmpork)
+ * [LinkedIn](http://www.linkedin.com/auggy)
+ * [Github](http://www.github.com/missaugustina)
 

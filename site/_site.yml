@@ -2,14 +2,12 @@ name: "rhappyfun"
 output_dir: site
 exclude: ["*.Rds"]
 navbar:
-  title: "R Happy FUN!"
+  title: "R Happy"
   left:
-    - text: "Home"
+    - text: "FUN!"
       href: index.html
-    - text: "About"
-      href: about.html
     - text: "Blog"
-      href: blog
+      href: blog.html
 output:
   rmdformats::html_clean:
     highlight: kate
