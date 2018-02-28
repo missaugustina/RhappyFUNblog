@@ -1,11 +1,13 @@
 ---
 title: "Render Slug"
+params:
+  slug: ""
 ---
 
-Copy this block into your blog entry and run it to generate the blog html for the website.
+Copy this block into your blog entry, include a param of the slug, then run it to generate the blog html for the website.
 
 ```{r render_me, eval=FALSE, include=FALSE}
 setwd("../../../")
+commandArgs <- function(...) params$slug
 source("render_slug.R")
-render_slug("slug-goes-here")
 ```

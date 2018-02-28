@@ -11,6 +11,8 @@ output:
     thumbnails: FALSE
     fig_caption: yes
     toc_depth: 2
+params:
+  slug: countering-bean-counting-commits
 ---
 
 
@@ -31,6 +33,11 @@ opts_chunk$set(echo=FALSE,
 opts_knit$set(width=75)
 ```
 
+```{r render_me, eval=FALSE, include=FALSE}
+setwd("../../../")
+commandArgs <- function(...) params$slug
+source("render_slug.R")
+```
 
 ```{r includes, include=FALSE}
 library(dplyr)
@@ -331,11 +338,7 @@ Commits are not a sufficient single measure of engagement. Other activities must
  * [Applying a Network to Tensorflow Commit Emails](https://rpubs.com/auggy/tensorflow-emails-igraph)
  * [Tensorflow Email Diversity](https://rpubs.com/auggy/tensorflow-emails-diversity)
  
-```{r render_me, eval=FALSE, include=FALSE}
-setwd("../../../")
-source("render_slug.R")
-render_slug("countering-bean-counting-commits")
-```
+ 
 
 
 
