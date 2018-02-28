@@ -1,0 +1,15 @@
+name: "rhappyfun"
+output_dir: site
+exclude: ["*.Rds"]
+navbar:
+  title: "R Happy FUN!"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
+    - text: "Blog"
+      href: blog
+output:
+  rmdformats::html_clean:
+    highlight: kate

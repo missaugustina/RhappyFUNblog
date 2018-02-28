@@ -1,0 +1,11 @@
+---
+title: "Render Slug"
+---
+
+Copy this block into your blog entry and run it to generate the blog html for the website.
+
+```{r render_me, eval=FALSE, include=FALSE}
+setwd("../../../")
+source("render_slug.R")
+render_slug("slug-goes-here")
+```
