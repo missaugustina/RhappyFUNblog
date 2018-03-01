@@ -26,6 +26,11 @@ blog_slug_nav <- str_replace(blog_slug_html, "<div class=\"container-fluid main-
                              paste0("<div class=\"container-fluid main-container\">", 
                                     blog_html_nav, 
                                     "<div class=\"fluid-row\"><br /><br /></div>"))
+blog_slug_nav <- append(blog_slug_nav, paste0("<div class=\"fluid-row\"><p align=\"center\"><a href=\"",
+                              "https://github.com/missaugustina/RhappyFUNblog/blob/master/", 
+                              "site/blog/", slug, "/", slug, ".Rmd\">",
+                              "This post is available as Rmarkdown on Github",
+                              "</a></p><div>"))
 
 # run the full site rendering
 write_lines(blog_slug_nav, "index.html")
