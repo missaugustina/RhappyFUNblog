@@ -20,3 +20,4 @@ readr::write_lines(blog_html_nav, paste0(path, "index.html"))
 
 setwd("site")
 rmarkdown::render_site()
+
