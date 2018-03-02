@@ -7,7 +7,7 @@ params:
 Copy this block into your blog entry, include a param of the slug, then run it to generate the blog html for the website.
 
 ```{r render_me, eval=FALSE, include=FALSE}
-setwd("../../../")
+library(here)
 commandArgs <- function(...) params$slug
-source("render_slug.R")
+source(here::here("render_slug.R"))
 ```

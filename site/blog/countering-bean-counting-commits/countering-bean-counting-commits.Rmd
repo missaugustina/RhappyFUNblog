@@ -36,7 +36,7 @@ opts_knit$set(width=75)
 ```{r render_me, eval=FALSE, include=FALSE}
 library(here)
 commandArgs <- function(...) params$slug
-source(here("render_slug.R"))
+source(here::here("render_slug.R"))
 ```
 
 ```{r includes, include=FALSE}

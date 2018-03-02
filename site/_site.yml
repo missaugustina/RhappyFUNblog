@@ -1,5 +1,5 @@
 name: "rhappyfun"
-output_dir: site
+output_dir: www
 exclude: ["*.Rds"]
 navbar:
   title: "R Happy"
