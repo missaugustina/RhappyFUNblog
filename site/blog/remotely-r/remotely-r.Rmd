@@ -1,5 +1,5 @@
 ---
-title: 'Remotely R'
+title: 'Remotely R: User Groups from Wide and Far'
 author: Augustina Ragwitz
 slug: remotely-r
 categories: []
