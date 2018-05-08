@@ -77,7 +77,7 @@ Bonding with your coworkers and a community is very challenging when your only i
 
 The R-Ladies Remote chapter was officially announced in early 2018 in response to the number of R-Ladies that either didn't have access to a strong local community or were unable to make regular R-Ladies chapter meetings near them. I joined because it was an opportunity to connect with the many R-Ladies I meet from around the world!
 
-![image: R-Ladies Remote [^2]](img/rladies-remote-why-remote.jpg)
+![image: R-Ladies Remote [^1]](img/rladies-remote-why-remote.jpg)
 
 ## Remote R at IBM, the R Guild
 
