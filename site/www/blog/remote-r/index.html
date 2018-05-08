@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="author" content="Augustina Ragwitz" />
+
+<meta name="date" content="2018-05-07" />
+
+<title>Remote R</title>
+
+<script src="index_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="index_files/bootstrap-3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+<script src="index_files/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+<script src="index_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<script src="index_files/navigation-1.1/tabsets.js"></script>
+<script src="index_files/navigation-1.1/codefolding.js"></script>
+<link href="index_files/magnific-popup-1.1.0/magnific-popup.css" rel="stylesheet" />
+<script src="index_files/magnific-popup-1.1.0/jquery.magnific-popup.min.js"></script>
+<link href="index_files/clean-0.1/clean.css" rel="stylesheet" />
+<script src="index_files/clean-0.1/clean.js"></script>
+
+
+
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+</style>
+<div class="container-fluid main-container"><div class="navbar navbar-default  navbar-fixed-top" role="navigation">  <div class="container">    <div class="navbar-header">      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">        <span class="icon-bar"></span>        <span class="icon-bar"></span>        <span class="icon-bar"></span>      </button>      <a class="navbar-brand" href="../../index.html">R Happy</a>    </div>    <div id="navbar" class="navbar-collapse collapse">      <ul class="nav navbar-nav">        <li>  <a href="../../index.html">FUN!</a></li><li>  <a href="../../blog.html">Blog</a></li><li>  <a href="../../research.html">Research</a></li><li>  <a href="../../music.html">Music</a></li>      </ul>      <ul class="nav navbar-nav navbar-right">              </ul>    </div><!--/.nav-collapse -->  </div><!--/.container --></div><!--/.navbar --><div class="fluid-row"><br /><br /></div>
+  <div class="row">
+     <div class="col-md-10">
+
+
+
+
+<div id="header">
+<h1 class="title">Remote R</h1>
+<h4 class="author"><em>Augustina Ragwitz</em></h4>
+<h4 class="date"><em>2018-05-07</em></h4>
+</div>
+
+<div id="content">
+<p>On Saturday, <a href="https://twitter.com/rladiesremote">R-Ladies Remote</a> hosted its first virtual meetup! An entirely apropos inaugural presentation topic, <a href="https://juliasilge.com/">Julia Silge</a> dropped the knowledge on Remote Work!</p>
+<blockquote class="twitter-tweet" data-lang="en">
+<p lang="en" dir="ltr">
+I enjoyed <a href="https://twitter.com/juliasilge?ref_src=twsrc%5Etfw"><span class="citation">@juliasilge</span></a> 's presentation. It wasn't even remotely boring. <a href="https://t.co/u5YED67r80">https://t.co/u5YED67r80</a>
+</p>
+— Auggy (<span class="citation">@mmmpork</span>) <a href="https://twitter.com/mmmpork/status/992892984067686400?ref_src=twsrc%5Etfw">May 5, 2018</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p>Her avid virtual viewers got to soak up her comprehensive insights on company cultures that work particularly well for remote working and strategies for challenges remote workers often face.</p>
+<blockquote>
+<p>“If one person in a meeting is remote, everyone is remote.” Julia Silge</p>
+</blockquote>
+<p>One nugget that really hit home for me was the value of work continuum. Daydreamers like myself have a million and one ideas kicking around in our noggins. While there is value in the creative process, <a href="https://twitter.com/hashtag/rchickenladies">better an egg today than a hen tomorrow</a>.</p>
+<div class="figure">
+<img src="img/value_of_work.jpg" alt="image: @Nujcharee https://twitter.com/Nujcharee" />
+<p class="caption">image: <span class="citation">@Nujcharee</span> <a href="https://twitter.com/Nujcharee" class="uri">https://twitter.com/Nujcharee</a></p>
+</div>
+<p>While this continuum applies to pretty much every hare-brained idea, the particular challenge remote workers face is lack of instant feedback one gets in an immersive office environment.</p>
+<blockquote>
+<p>What of what we do matters the most?</p>
+</blockquote>
+<p>Which leads us to the more meta-topic, how do remote workers connect to each other?</p>
+<div id="the-social-connection" class="section level2">
+<h2>The Social Connection</h2>
+<p>Bonding with your coworkers and a community is very challenging when your only interactions are work time. While some solutions exist, like a virtual (insert-beverage-of-choice-here) chat or periodic in-person on-sites, connecting with the community beyond your workplace is another challenge.</p>
+<p>The R-Ladies Remote chapter was officially announced in February of 2018 in response to the number of R-Ladies that either didn’t have access to a strong local community or were unable to make regular R-Ladies chapter meetings near them. I joined because it was an opportunity to connect with many R-Ladies I meet from around the world!</p>
+<blockquote>
+<p>Why Go Remote?</p>
+<ol style="list-style-type: decimal">
+<li>Obvious - no group near you</li>
+<li>Regular attendance not possible due to work or life demands or you may simply live too far away.</li>
+<li>Broaden your community network</li>
+</ol>
+</blockquote>
+</div>
+<div id="remote-r-at-ibm-the-r-guild" class="section level2">
+<h2>Remote R at IBM, the R Guild</h2>
+<p>At IBM, even though many people traditionally work from an office, we are so geographically spread out, we have to every meeting as a remote meeting. Additionally, R users are often buried in areas no one would expect (well, except for R users).</p>
+<p>Last year, we created a virtual community called the R guild. We started an internal Slack channel where people could connect. We’ve hosted meetings through video chats and are still experimenting with format and meeting rotation. People’s schedules and timezones complicate things. However, for people who were able to attend, it’s been worth it.</p>
+<p>Going forward, we’ve been exploring other options that support asynchronous interactions like a forum and periodic R code challenges. The group is still gaining momentum but it’s been a great resource for connecting R users across the many-headed hydra known as IBM.</p>
+</div>
+<div id="other-remote-r-groups-worth-considering" class="section level2">
+<h2>Other Remote R Groups Worth Considering</h2>
+<p>If you don’t fall into the “lady and/or non-binary” category but would like to join a remote community, I would recommend the <a href="https://www.jessemaegan.com/post/r4ds-the-next-iteration/">R4DS online learning community</a> started by Jesse Maegan in 2017. Jesse started the community as a way to connect with others who were learning R using the book <a href="http://r4ds.had.co.nz/">R for Data Science</a>.</p>
+<blockquote>
+<p>Follow the R4DS community on Twitter: <a href="https://twitter.com/R4DScommunity" class="uri">https://twitter.com/R4DScommunity</a></p>
+</blockquote>
+</div>
+<div id="starting-your-own-remote-community" class="section level2">
+<h2>Starting Your Own Remote Community</h2>
+<p>The <a href="https://www.r-consortium.org">R Consortium</a> provides support for useR groups and one day conferences called SatRdays. If your group is an R user group, <a href="https://www.r-consortium.org/projects/r-user-group-support-program">consider applying to the R Consortium for support</a>. This is especially handy for video conferencing that supports a large number of users.</p>
+<p>If you’re not sure about a regular group, consider a 1-day virtual conference! You can get additional support through the <a href="https://www.r-consortium.org">R Consortium’s SatRdays intiative</a>.</p>
+<p>Here are some additional things to think about when starting a Remote Community:</p>
+<ul>
+<li>Time-zones - make sure event times include a link to a timezone converter</li>
+<li>Offer multiple ways to connect - Not everyone has access to high bandwidth, can people call in on a land line? Is there a chat option?</li>
+<li>Consider a chat-based meeting with an agenda - this approach has been used in other open source communities via IRC for a number of years</li>
+<li>Make logs and meeting recordings for those who couldn’t attend</li>
+<li>Alternate meeting times to make attendance more convenient for different time-zones</li>
+<li>Or better yet, Recruit a co-organizer in an opposite timezone!</li>
+</ul>
+</div>
+<div id="tools-for-remote-meetings" class="section level2">
+<h2>Tools for Remote Meetings</h2>
+<p>The following is a short list of tools and services to consider for remote user groups. Any other remote meeting tools or tips you’d like to share? Tweet at me <a href="https://twitter.com/intent/tweet?url=http://rhappy.fun/blog/remote-r&amp;text=A+remote+meeting+thing+I+like+is+...+@mmmpork+@IBMCode+@RLadiesRemote&amp;hashtags=rstats,rladies">@mmmpork</a>. Emojis and GIFs optional but appreciated.</p>
+<div id="chat-tools" class="section level3">
+<h3>Chat tools</h3>
+<ul>
+<li><a href="https://slack.com/">Slack</a> - Slack is one of the more popular chat platforms used these days. It can run in browser, on your phone, or locally through a client. It’s a privately owned company and the free version has limited features.</li>
+<li><a href="https://www.irccloud.com">IRC</a> - Internet Relay Chat is provided through Freenode or other providers. I’ve linked IRC Cloud because it’s a great client that makes IRC as easy to use as Slack (and it works great on your phone!). It’s free but may require some elbow grease and good ol’ fashioned know-how to customize.</li>
+</ul>
+</div>
+<div id="video-tools" class="section level3">
+<h3>Video tools</h3>
+<p>Video is a great way to increase the quality of interaction with other members. The two general paradigms are one-way broadcasts (great for 1-day conference formats or traditional presentations) and video conferences.</p>
+<div id="one-way-broadcasts" class="section level4">
+<h4>One-Way Broadcasts</h4>
+<p><a href="https://www.youtube.com/live_dashboard_splash">Youtube Live</a> is a great, easy way to share a video feed and it offers a live chat stream.</p>
+<p><a href="https://www.twitch.tv/">Twitch</a> is more well-known in the video game world, but IBM has had some success using it for live streaming. I was the guinea pig for a new video podcast our Open Source Advocacy are developing.</p>
+</div>
+<div id="video-conferencing" class="section level4">
+<h4>Video Conferencing</h4>
+<ul>
+<li><a href="https://zoom.us/">Zoom</a> - Zoom is used by a lot of folks in a lot of places, but it does cost money for a bigger audience. The <a href="https://www.r-consortium.org">R Consortium</a> may be able to offer support through the <a href="https://www.r-consortium.org/projects/r-user-group-support-program">useR intiative</a>.</li>
+<li><a href="https://appear.in/">Appear.in</a> - Runs in browser and supports up to 12 participants on the pro plan. A great option if your group is small.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="the-importance-of-irl" class="section level2">
+<h2>The Importance of IRL</h2>
+<p>I’m a huge fan of remote, especially as a researcher. However, it’s still important to connect to communities in the flesh. If there aren’t enough users of a particular language or technology in your area, find a more general topic or format people may be open to gathering on. For instance, my buddy <a href="http://genehack.net">Genehack</a>, longing for the physical company of other Perl users, formed a general purpose “interpreted languages” user group in Salem, OR.</p>
+<p>If the reason you don’t attend meetings is due to schedule issues, consider hosting events at a time that works better for you. These don’t have to be formal presentation style!</p>
+<p>Other options to consider:</p>
+<ul>
+<li>Code + Coffee (and/or other beverage of choice)</li>
+<li>Form a Study Group</li>
+<li>Book (or other media) Club</li>
+<li>Regular Share and Tell around a common subject or problem</li>
+<li>A Quarterly Hackathon or Code-A-Long</li>
+</ul>
+</div>
+<div id="final-thoughts" class="section level2">
+<h2>Final Thoughts</h2>
+<p>Remote work is very rewarding and satisfying, however we do need to get out of the house and put on pants once in awhile. For those times when putting on pants is less practical, remote communities can serve as a great substitute for expanding our personal networks and stoking our social fires.</p>
+</div>
+</div>
+
+
+    </div>
+    <div class="col-md-2">
+      <div id="toc">
+      	<button type="button" class="close">×</button>
+        <ul>
+        <li><a href="#the-social-connection">The Social Connection</a></li>
+        <li><a href="#remote-r-at-ibm-the-r-guild">Remote R at IBM, the R Guild</a></li>
+        <li><a href="#other-remote-r-groups-worth-considering">Other Remote R Groups Worth Considering</a></li>
+        <li><a href="#starting-your-own-remote-community">Starting Your Own Remote Community</a></li>
+        <li><a href="#tools-for-remote-meetings">Tools for Remote Meetings</a></li>
+        <li><a href="#the-importance-of-irl">The Importance of IRL</a></li>
+        <li><a href="#final-thoughts">Final Thoughts</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$(document).ready(function () {
+
+  // add bootstrap table styles to pandoc tables
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+
+});
+</script>
+
+<script>
+$(document).ready(function () {
+ 	    $('#content img')
+ 	  .addClass("image-lb");
+  $('#content').magnificPopup({
+	      type:'image',
+	      closeOnContentClick: false,
+	      delegate: 'img',
+	      gallery: {enabled: false },
+	      image: {
+	        verticalFit: true,
+          titleSrc: 'alt'
+	      }
+ 	    });
+ 	});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="fluid-row"><p align="center"><a href="https://github.com/missaugustina/RhappyFUNblog/blob/master/site/blog/remote-r/remote-r.Rmd">This post is available as Rmarkdown on Github</a></p></div></body>
+</html>
