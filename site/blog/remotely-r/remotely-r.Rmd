@@ -1,7 +1,7 @@
 ---
-title: 'Remote R'
+title: 'Remotely R'
 author: Augustina Ragwitz
-slug: remote-r
+slug: remotely-r
 categories: []
 tags: []
 date: "`r Sys.Date()`"
@@ -12,7 +12,7 @@ output:
     fig_caption: yes
     toc_depth: 2
 params:
-  slug: remote-r
+  slug: remotely-r
 ---
 
 
