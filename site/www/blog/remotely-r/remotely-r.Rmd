@@ -57,11 +57,7 @@ Her avid array of virtual viewers got to soak up her comprehensive insights on r
 
 One nugget that really hit home for me was the value of work continuum. Daydreamers like myself have a million and one ideas knocking around in our noggins. While there is value in the creative process, [better an egg today than a hen tomorrow](https://twitter.com/hashtag/rchickenladies).
 
-
-![All the Things! Image: Steph de Silva [^1]](img/value_of_work.jpg)
-
-
-![All the Things, Prioritized! Image: Julia Silge ](img/value_of_work_2.png)
+![All the Things! Image: Julia Silge ](img/value_of_work.png)
 
 The value of work continuum can apply to pretty much every hare-brained idea we all have kicking around. The particular challenge remote workers face is lack of instant feedback one gets in an immersive office environment, making it a little easier to get lost in the weeds.
 
@@ -153,6 +149,5 @@ Other options to consider:
 
 Remote work is very rewarding and satisfying, however we do need to get out of the house and put on pants once in awhile. For those times when putting on pants is less practical, remote communities can serve as a great substitute for expanding our personal networks and stoking our social fires.
 
-[^1]: [@StephdeSilva](https://twitter.com/StephdeSilva)
-[^2]: [R-Ladies Remote "Why R-Ladies Remote?"](https://twitter.com/RLadiesRemote/status/988580783261564928)
-[^3]: The video seems to have disappeared! I'll update once I find out where they archived it!
+[^1]: [R-Ladies Remote "Why R-Ladies Remote?"](https://twitter.com/RLadiesRemote/status/988580783261564928)
+[^2]: The video seems to have disappeared! I'll update once I find out where they archived it!
