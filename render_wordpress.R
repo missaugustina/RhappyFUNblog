@@ -5,7 +5,7 @@ library(readr)
 library(rmarkdown)
 library(stringr)
 
-# commandArgs <- function(...) c(params$slug,"http://developer.ibm.com/code/wp-content/uploads/sites/118/2018/03/")
+# commandArgs <- function(...) c(params$slug,"http://developer.ibm.com/code/wp-content/uploads/sites/118/2018/05/")
 # you have to get the wp url after uploading images to the developerworks site
 
 slug <- commandArgs()[1]
