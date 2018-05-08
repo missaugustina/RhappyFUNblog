@@ -124,7 +124,7 @@ Video is a great way to increase the quality of interaction with other members. 
 #### One-Way Broadcasts
 
  * [Youtube Live](https://www.youtube.com/live_dashboard_splash) is a great, easy way to share a video feed and it offers a live chat stream.
- * [Twitch](https://www.twitch.tv/) is more well-known in the video game world, but IBM has had some success using it for live streaming. I was the guinea pig for a [video series](https://www.twitch.tv/ibmcode) our Open Source Advocacy folks are developing. [^3]
+ * [Twitch](https://www.twitch.tv/) is more well-known in the video game world, but IBM has had some success using it for live streaming. I was the guinea pig for a [video series](https://www.twitch.tv/ibmcode) our Open Source Advocacy folks are developing. [^2]
 
 #### Video Conferencing
 
