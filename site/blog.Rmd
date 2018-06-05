@@ -5,7 +5,6 @@ output:
     highlight: kate
 ---
 
-
 ```{r knitr_init, echo=FALSE, cache=FALSE, message=FALSE}
 library(knitr)
 library(rmdformats)
@@ -23,7 +22,7 @@ opts_chunk$set(echo=FALSE,
                comment=NA,
                message=FALSE,
                warning=FALSE)
-opts_knit$set(width=75)
+opts_knit$set(width=75, self.contained = FALSE)
 ```
 
 ```{r build_index, include=FALSE}

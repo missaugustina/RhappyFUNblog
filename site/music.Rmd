@@ -18,8 +18,11 @@ opts_chunk$set(echo=FALSE,
                comment=NA,
                message=FALSE,
                warning=FALSE)
-opts_knit$set(width=75)
+opts_knit$set(width=75, self.contained = FALSE)
 ```
+
+
+
 
 # Boom Boom Chickachickachicka WOWOWOW
 
