@@ -1,6 +1,7 @@
 #!/usr/bin/env Rscript
 
 library(here)
+library(purrr)
 library(readr)
 library(rmarkdown)
 library(stringr)
@@ -28,7 +29,7 @@ blog_html_nav <- str_replace_all(blog_html_nav, "href=\"", "href=\"../../")
 blog_slug_nav <- str_replace(blog_slug_html, "<div class=\"container-fluid main-container\">",
                              paste0("<div class=\"container-fluid main-container\">", 
                                     blog_html_nav, 
-                                    "<div class=\"fluid-row\"><br /><br /></div>"))
+                                    "<div class=\"fluid-row\">test<br />test<br />test<br />test<br />test<br /></div>"))
 
 # add github link to blog entries
 blog_slug_nav <- str_replace(blog_slug_nav, "</body>",
@@ -45,5 +46,10 @@ print(paste("removing", blog_slug_nav[mathjax_line:(mathjax_line+8)]))
 blog_slug_nav[mathjax_line:(mathjax_line+8)] = ""
 
 # run the full site rendering
-write_lines(blog_slug_nav, here::here("site", "blog" ,slug,"index.html"))
-render_site(input=here::here("site"))
+write_lines(blog_slug_nav, here::here("site", "blog", slug,"index.html"))
+
+# Something is breaking the navigation layout when running render_site and passing in all files
+# render_site(here::here("site"))
+site_files <- list.files(path=here::here("site"), pattern="*.Rmd", full.names = FALSE)
+site_files %>% map(~ render_site(here::here("site", .x)))
+
