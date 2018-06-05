@@ -29,7 +29,7 @@ blog_html_nav <- str_replace_all(blog_html_nav, "href=\"", "href=\"../../")
 blog_slug_nav <- str_replace(blog_slug_html, "<div class=\"container-fluid main-container\">",
                              paste0("<div class=\"container-fluid main-container\">", 
                                     blog_html_nav, 
-                                    "<div class=\"fluid-row\">test<br />test<br />test<br />test<br />test<br /></div>"))
+                                    "<div class=\"fluid-row\"><br /><br /><br /></div>"))
 
 # add github link to blog entries
 blog_slug_nav <- str_replace(blog_slug_nav, "</body>",
