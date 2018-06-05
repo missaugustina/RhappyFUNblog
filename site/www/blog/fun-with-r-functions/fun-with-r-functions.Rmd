@@ -76,8 +76,8 @@ Whenever I create an R codeblock that's going to do something other than display
 
 One strategy I use is to think about my function as having 3 main parts: In, The Business, Out
 
-`{r get_the_pfunk}`
-```{r get_the_pfunk_1, eval=FALSE}
+```
+{r get_the_pfunk}
 
 # In: The cut funk
 
@@ -86,7 +86,6 @@ One strategy I use is to think about my function as having 3 main parts: In, The
 # Out: The uncut funk
 
 ```
-
 ## Moonwalk-Driven Development
 
 One tenet I learned from Functional Programming: a function should always return something. To figure out what I need from my function, I start writing my code by doing something with the result at the end of the code block. 
@@ -99,8 +98,8 @@ What do you want to do with your end result?
  * Plot it? 
  * Write it out?
 
-`{r get_the_pfunk}`
-```{r get_the_pfunk_2, eval=FALSE}
+```
+{r get_the_pfunk}
 
 # In: The cut funk
 
@@ -115,8 +114,8 @@ write_rds(uncut_funk_df, "uncut_funk_df.Rds")
 
 Next, I declare my inputs at the top of the code block. This may require consulting package or API documentation (or both!). This step separates out what parameters your function will ultimately need to take. It also prevents you from accidentally embedding a value that will break once the function is fully encapsulated (R error messages are so helpful!).
 
-`{r get_the_pfunk}`
-```{r get_the_pfunk_3, eval=FALSE}
+```
+{r get_the_pfunk}
 
 # In: The cut funk
 cut_funks <- read_rds("cut_funks.Rds")
@@ -134,8 +133,8 @@ write_rds(uncut_funk_df, "uncut_funk_df.Rds")
 
 As you fill in the rest of the code, be sure to declare additional parameters at the top of the code block to keep track of them. You'll be doing a lot of reworking but at least having clear beginning and end points will keep it contained!
 
-`{r get_the_pfunk}`
-```{r get_the_pfunk_4, eval=FALSE}
+```
+{r get_the_pfunk}
 
 # In: The cut funk
 cut_funks <- read_rds("cut_funks.Rds")
@@ -174,8 +173,8 @@ write_rds(uncut_funk_df, "uncut_funk_df.Rds")
 
 Once you've got a functional work flow, move the behavior in between a pair of curly braces as part of a function declaration. Refactor the part of your code where you're doing something with the output to call your function instead.
 
-`{r get_the_pfunk}`
-```{r get_the_pfunk_5, eval=FALSE}
+```
+{r get_the_pfunk}
 
 # In: The cut funk
 cut_funks <- read_rds("cut_funks.Rds")
@@ -224,8 +223,8 @@ Once you've got a set of code blocks in your Rmd you're running regularly and ar
 
 The functions you've created are probably pretty big and complicated. You might find yourself repeating code inside of them. A good next step is to refactor these repeated units out into their own functions. 
 
-`{r get_the_pfunk}`
-```{r get_the_pfunk_6, eval=FALSE}
+```
+{r get_the_pfunk}
 
 # In: The cut funk
 cut_funks <- read_rds("cut_funks.Rds")
@@ -297,7 +296,7 @@ Use variables as much as possible!
 
 Don't just put a wrapper around another function.
 
-```{r eval=FALSE}
+```
 print_the_funk <- function(the_funk) {
   print(paste(the_funk))
 }
@@ -306,8 +305,7 @@ print_the_funk <- function(the_funk) {
 
 However, if you repeatedly modify the input value in some way, make that a function!
 
-```{r, eval=FALSE}
-
+```
 parse_the_funk <- function(the_funk) {
   the_new_funk <- the_funk %>%
     filter(!is.na(bootsy))
@@ -324,8 +322,7 @@ print(paste(parse_the_funk(the_funk)))
 
 It's ok to start out with a complicated function during development, but over time you want to move things out of it. You should do this as you encounter errors or need to reuse specific parts.
 
-```{r, eval=FALSE}
-
+```
 # There's a whole lot of function going down!
 
 get_the_funk <- function(the_funk) {

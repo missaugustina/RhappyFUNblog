@@ -103,7 +103,14 @@ img {
 <h2>Verb the Code-blocks</h2>
 <p>Whenever I create an R codeblock that’s going to do something other than display a plot, I give it a function-worthy name. I also find it helpful to pseudocode out what I want to do in this code block.</p>
 <p>One strategy I use is to think about my function as having 3 main parts: In, The Business, Out</p>
-<p><code>{r get_the_pfunk}</code></p>
+<pre><code>{r get_the_pfunk}
+
+# In: The cut funk
+
+# The Business: Get the uncut funk from the P-Funk API
+
+# Out: The uncut funk
+</code></pre>
 </div>
 <div id="moonwalk-driven-development" class="section level2">
 <h2>Moonwalk-Driven Development</h2>
@@ -117,21 +124,110 @@ img {
 <li>Plot it?</li>
 <li>Write it out?</li>
 </ul>
-<p><code>{r get_the_pfunk}</code></p>
+<pre><code>{r get_the_pfunk}
+
+# In: The cut funk
+
+# The Business: Get the uncut funk from the P-Funk API
+
+# Out: The uncut funk
+
+write_rds(uncut_funk_df, &quot;uncut_funk_df.Rds&quot;)</code></pre>
 <div id="i-do-declare" class="section level3">
 <h3>I Do Declare</h3>
 <p>Next, I declare my inputs at the top of the code block. This may require consulting package or API documentation (or both!). This step separates out what parameters your function will ultimately need to take. It also prevents you from accidentally embedding a value that will break once the function is fully encapsulated (R error messages are so helpful!).</p>
-<p><code>{r get_the_pfunk}</code></p>
+<pre><code>{r get_the_pfunk}
+
+# In: The cut funk
+cut_funks &lt;- read_rds(&quot;cut_funks.Rds&quot;)
+
+# The Business: Get the uncut funk from the P-Funk API
+
+# Out: The uncut funk
+uncut_funk_df
+
+write_rds(uncut_funk_df, &quot;uncut_funk_df.Rds&quot;)
+</code></pre>
 </div>
 <div id="make-it-so" class="section level3">
 <h3>Make It So</h3>
 <p>As you fill in the rest of the code, be sure to declare additional parameters at the top of the code block to keep track of them. You’ll be doing a lot of reworking but at least having clear beginning and end points will keep it contained!</p>
-<p><code>{r get_the_pfunk}</code></p>
+<pre><code>{r get_the_pfunk}
+
+# In: The cut funk
+cut_funks &lt;- read_rds(&quot;cut_funks.Rds&quot;)
+
+# We&#39;ll need a few more things to get all that funk!
+pfunk_api_params &lt;- list(
+  client_id=params$pfunk_api_key,
+  funk_size=100
+)
+
+# The Business: Get the uncut funk from the P-Funk API
+uncut_funk_df &lt;- data_frame()
+for f in (1:nrow(cut_funks)) {
+  # build request url
+  pfunk_api_url &lt;- paste0(&quot;https://api.pfunk.fun/&quot;, f$name[n]) # &lt;-- Do you have something to declare?
+  
+  # make api request
+  pfunk_api_req &lt;- GET(pfunk_api_url, query=pfunk_api_params)
+  
+  # parse json output into dataframe
+  pfunk_api_json &lt;- content(pfunk_api_req, as = &quot;text&quot;)
+  pfunk_api_resp &lt;- fromJSON(pfunk_api_json, flatten = TRUE)
+
+  # append to rest of responses
+  uncut_funk_df &lt;- bind_rows(uncut_funk_df, pfunk_api_json)
+}
+
+# Out: The uncut funk
+uncut_funk_df
+
+write_rds(uncut_funk_df, &quot;uncut_funk_df.Rds&quot;)
+</code></pre>
 </div>
 <div id="brace-yourself" class="section level3">
 <h3>Brace Yourself</h3>
 <p>Once you’ve got a functional work flow, move the behavior in between a pair of curly braces as part of a function declaration. Refactor the part of your code where you’re doing something with the output to call your function instead.</p>
-<p><code>{r get_the_pfunk}</code></p>
+<pre><code>{r get_the_pfunk}
+
+# In: The cut funk
+cut_funks &lt;- read_rds(&quot;cut_funks.Rds&quot;)
+
+# We&#39;ll need a few more things to get all that funk!
+pfunk_api_params &lt;- list(
+  client_id=params$pfunk_api_key,
+  funk_size=100
+)
+pfunk_api_base_url &lt;- &quot;https://api.pfunk.fun/&quot;
+
+get_the_pfunk &lt;- function(cut_funks, pfunk_api_base_url, pfunk_api_params) { # &lt;-- these names don&#39;t have to match what&#39;s declared above!
+
+  # The Business: Get the uncut funk from the P-Funk API
+  uncut_funk_df &lt;- data_frame()
+
+  for f in (1:nrow(cut_funks)) {
+    # build request url
+    pfunk_api_url &lt;- paste0(pfunk_api_base_url, f$name[n])
+    
+    # make api request
+    pfunk_api_req &lt;- GET(pfunk_api_url, 
+                         query=pfunk_api_params)
+    
+    # parse json output into dataframe
+    pfunk_api_json &lt;- content(pfunk_api_req, as = &quot;text&quot;)
+    pfunk_api_resp &lt;- fromJSON(pfunk_api_json, flatten = TRUE)
+  
+    # append to rest of responses
+    uncut_funk_df &lt;- bind_rows(uncut_funk_df, pfunk_api_json)
+  }
+}
+
+# Out: The uncut funk
+uncut_funk_df &lt;- get_the_pfunk(pfunk_api_base_url, pfunk_api_params)
+
+write_rds(uncut_funk_df, &quot;uncut_funk_df.Rds&quot;)
+</code></pre>
 </div>
 <div id="the-only-time-youll-copy-pasta" class="section level3">
 <h3>The Only Time You’ll Copy-Pasta</h3>
@@ -140,7 +236,52 @@ img {
 <div id="refactor-your-little-heart-out" class="section level3">
 <h3>Refactor Your Little Heart Out</h3>
 <p>The functions you’ve created are probably pretty big and complicated. You might find yourself repeating code inside of them. A good next step is to refactor these repeated units out into their own functions.</p>
-<p><code>{r get_the_pfunk}</code></p>
+<pre><code>{r get_the_pfunk}
+
+# In: The cut funk
+cut_funks &lt;- read_rds(&quot;cut_funks.Rds&quot;)
+
+# We&#39;ll need a few more things to get all that funk!
+pfunk_api_params &lt;- list(
+  client_id=params$pfunk_api_key,
+  funk_size=100
+)
+pfunk_api_base_url &lt;- &quot;https://api.pfunk.fun/&quot;
+
+get_pfunk_api_req(cut_funks, pfunk_api_url, pfunk_api_params) {
+  # make api request
+  pfunk_api_req &lt;- GET(pfunk_api_url, 
+                         query=pfunk_api_params)
+    
+  # parse json output into dataframe
+  pfunk_api_json &lt;- content(pfunk_api_req, as = &quot;text&quot;)
+  pfunk_api_resp &lt;- fromJSON(pfunk_api_json, flatten = TRUE)
+  
+  return(pfunk_api_resp)
+}
+
+get_the_pfunk &lt;- function(cut_funks, pfunk_api_base_url, pfunk_api_params) {
+
+  # The Business: Get the uncut funk from the P-Funk API
+  uncut_funk_df &lt;- data_frame()
+
+  for f in (1:nrow(cut_funks)) {
+    # build request url
+    pfunk_api_url &lt;- paste0(pfunk_api_base_url, f$name[n])
+    
+    # call the pfunk api
+    pfunk_api_resp &lt;- get_pfunk_api_req(pfunk_api_url, pfunk_api_params))
+  
+    # append to rest of responses
+    uncut_funk_df &lt;- bind_rows(uncut_funk_df, pfunk_api_json)
+  }
+}
+
+# Out: The uncut funk
+uncut_funk_df &lt;- get_the_pfunk(pfunk_api_base_url, pfunk_api_params)
+
+write_rds(uncut_funk_df, &quot;uncut_funk_df.Rds&quot;)
+</code></pre>
 </div>
 <div id="test-yourself" class="section level3">
 <h3>Test Yourself</h3>
@@ -167,11 +308,61 @@ img {
 <div id="not-too-specific" class="section level2">
 <h2>Not Too Specific</h2>
 <p>Don’t just put a wrapper around another function.</p>
+<pre><code>print_the_funk &lt;- function(the_funk) {
+  print(paste(the_funk))
+}
+</code></pre>
 <p>However, if you repeatedly modify the input value in some way, make that a function!</p>
+<pre><code>parse_the_funk &lt;- function(the_funk) {
+  the_new_funk &lt;- the_funk %&gt;%
+    filter(!is.na(bootsy))
+  
+  return(the_new_funk)
+}
+
+the_funk &lt;- read_rds(&quot;the_funk.Rds&quot;)
+print(paste(parse_the_funk(the_funk)))
+</code></pre>
 </div>
 <div id="not-too-complicated" class="section level2">
 <h2>Not Too Complicated</h2>
 <p>It’s ok to start out with a complicated function during development, but over time you want to move things out of it. You should do this as you encounter errors or need to reuse specific parts.</p>
+<pre><code># There&#39;s a whole lot of function going down!
+
+get_the_funk &lt;- function(the_funk) {
+  
+  uncut_funk_df &lt;- data_frame()
+
+  for f in (1:nrow(cut_funks)) {
+    # build request url
+    pfunk_api_url &lt;- paste0(pfunk_api_base_url, f$name[n])
+    
+    # call the pfunk api
+    pfunk_api_resp &lt;- get_pfunk_api_req(pfunk_api_url, pfunk_api_params))
+  
+    # append to rest of responses
+    uncut_funk_df &lt;- bind_rows(uncut_funk_df, pfunk_api_json)
+  }
+
+  uncut_funk_df &lt;- uncut_funk_df %&gt;%
+    filter(!is.na(bootsy)) %&gt;%
+    mutate(funk=str_replace(funk, &quot;funk&quot;, &quot;pfunk&quot;))
+  
+  pfunk_api_2 &lt;- get_pfunk_api_req(paste0(pfunk_api_url, &quot;/planet&quot;), pfunk_api_params))
+  uncut_funk_df &lt;- bind_col(uncut_funk_df, pfunk_api_2$planet)
+  
+  uncut_funk_df &lt;- uncut_funk_df %&gt;%
+    group_by(planet) %&gt;%
+    mutate(num_funks=n())
+  
+  save_rds(uncut_funk_df, &quot;uncut_funk_df.Rds&quot;)
+  
+  return(uncut_funk_df)
+}
+
+the_funk &lt;- read_rds(&quot;the_funk.Rds&quot;)
+print(paste(parse_the_funk(the_funk)))
+</code></pre>
 </div>
 <div id="return-something" class="section level2">
 <h2>Return Something</h2>
