@@ -15,3 +15,5 @@ navbar:
 output:
   rmdformats::html_clean:
     highlight: kate
+    toc: false
+    self_contained: FALSE
