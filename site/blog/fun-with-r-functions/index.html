@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="author" content="Augustina Ragwitz" />
+
+<meta name="date" content="2018-06-04" />
+
+<title>Putting the FUN into R Functions!</title>
+
+<script src="index_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="index_files/bootstrap-3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+<script src="index_files/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+<script src="index_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<script src="index_files/navigation-1.1/tabsets.js"></script>
+<script src="index_files/navigation-1.1/codefolding.js"></script>
+<link href="index_files/magnific-popup-1.1.0/magnific-popup.css" rel="stylesheet" />
+<script src="index_files/magnific-popup-1.1.0/jquery.magnific-popup.min.js"></script>
+<link href="index_files/clean-0.1/clean.css" rel="stylesheet" />
+<script src="index_files/clean-0.1/clean.js"></script>
+
+
+
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+</style>
+<div class="container-fluid main-container"><div class="navbar navbar-default  navbar-fixed-top" role="navigation">  <div class="container">    <div class="navbar-header">      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">        <span class="icon-bar"></span>        <span class="icon-bar"></span>        <span class="icon-bar"></span>      </button>      <a class="navbar-brand" href="../../index.html">R Happy</a>    </div>    <div id="navbar" class="navbar-collapse collapse">      <ul class="nav navbar-nav">        <li>  <a href="../../index.html">FUN!</a></li><li>  <a href="../../blog.html">Blog</a></li><li>  <a href="../../research.html">Research</a></li><li>  <a href="../../music.html">Music</a></li>      </ul>      <ul class="nav navbar-nav navbar-right">              </ul>    </div><!--/.nav-collapse -->  </div><!--/.container --></div><!--/.navbar --><div class="fluid-row"><br /><br /></div>
+  <div class="row">
+     <div class="col-md-10">
+
+
+
+
+<div id="header">
+<h1 class="title">Putting the FUN into R Functions!</h1>
+<h4 class="author"><em>Augustina Ragwitz</em></h4>
+<h4 class="date"><em>2018-06-04</em></h4>
+</div>
+
+<div id="content">
+<div id="why-function" class="section level1">
+<h1>Why Function?</h1>
+<p>Do you find yourself using a lot of copy-pasta code blocks? If you change something in one, you have to change it everywhere else! If you find yourself re-using the same code blocks over and over again, it will save you a lot of pain if you centralize them into a package or at least a few *.R files!</p>
+<blockquote>
+<p>Functions allow you to write reusable code blocks that you can share with others.</p>
+</blockquote>
+<blockquote>
+<p>Functions also have the advantage of being testable, something that’s not so easy to do with random code blocks.</p>
+</blockquote>
+</div>
+<div id="functional-thinking" class="section level1">
+<h1>Functional Thinking</h1>
+<p>In my former career life as a software engineer, I spent copious hours writing, debugging, and refactoring functions that were both functional and dysfunctional. I read up on best practices and attended tutorials and conference talks to learn how to function better. Eventually I found ultimate functionality in the Haskell programming language and like a true Haskell hipster lament the monadic lack in every other language I’ve used</p>
+<p>Eventually I became more interested in studying programmers than being one, going from Computer Scientist to Social Computer Scientist. I’ve been using R for a year and some change and have had to adapt to a hypothesis driven workflow reminiscent of my university days as an idealistic Anthropology major.</p>
+<p>Before diving into my Functional Philosophy, I want to take a moment to point out why, as a Data Scientist you might struggle with traditional approaches to software architecture.</p>
+<div id="research-is-different" class="section level2">
+<h2>Research is Different</h2>
+<p>A traditional software engineering workflow starts with a requirement. Everyone is pretty clear about what a thing needs to do even if they aren’t entirely sure how to get there.</p>
+<p>In research, you start with a very different set of requirements (depending on the nature of your research). At some point this should turn into a question which then should evolve into a hypothesis which ultimately spawns several more sub-hypotheses <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</p>
+<p>If these questions were easy to answer, they wouldn’t be coming to me; they’d be giving the code monkeys the requirements and a deadline.</p>
+<blockquote>
+<p>Research is different from software engineering because you don’t know where you’re going to end up!</p>
+</blockquote>
+</div>
+</div>
+<div id="a-functional-data-frame-of-mind" class="section level1">
+<h1>A Functional Data-Frame of Mind</h1>
+<p>I love R markdown because I can document what I’ve tried on my research journey and it outputs a replayable and publishable format. It’s easy to use and decreases the time from in-brain to out-of-brain.</p>
+<div id="verb-the-code-blocks" class="section level2">
+<h2>Verb the Code-blocks</h2>
+<p>Whenever I create an R codeblock that’s going to do something other than display a plot, I give it a function-worthy name. I also find it helpful to pseudocode out what I want to do in this code block.</p>
+<p>One strategy I use is to think about my function as having 3 main parts: In, The Business, Out</p>
+<p><code>{r get_the_pfunk}</code></p>
+</div>
+<div id="moonwalk-driven-development" class="section level2">
+<h2>Moonwalk-Driven Development</h2>
+<p>One tenet I learned from Functional Programming: a function should always return something. To figure out what I need from my function, I start writing my code by doing something with the result at the end of the code block.</p>
+<blockquote>
+<p>Thinking about what you want to do with the output of your function helps to focus on why you’re writing the code you’re writing.</p>
+</blockquote>
+<p>What do you want to do with your end result?</p>
+<ul>
+<li>Print it?</li>
+<li>Plot it?</li>
+<li>Write it out?</li>
+</ul>
+<p><code>{r get_the_pfunk}</code></p>
+<div id="i-do-declare" class="section level3">
+<h3>I Do Declare</h3>
+<p>Next, I declare my inputs at the top of the code block. This may require consulting package or API documentation (or both!). This step separates out what parameters your function will ultimately need to take. It also prevents you from accidentally embedding a value that will break once the function is fully encapsulated (R error messages are so helpful!).</p>
+<p><code>{r get_the_pfunk}</code></p>
+</div>
+<div id="make-it-so" class="section level3">
+<h3>Make It So</h3>
+<p>As you fill in the rest of the code, be sure to declare additional parameters at the top of the code block to keep track of them. You’ll be doing a lot of reworking but at least having clear beginning and end points will keep it contained!</p>
+<p><code>{r get_the_pfunk}</code></p>
+</div>
+<div id="brace-yourself" class="section level3">
+<h3>Brace Yourself</h3>
+<p>Once you’ve got a functional work flow, move the behavior in between a pair of curly braces as part of a function declaration. Refactor the part of your code where you’re doing something with the output to call your function instead.</p>
+<p><code>{r get_the_pfunk}</code></p>
+</div>
+<div id="the-only-time-youll-copy-pasta" class="section level3">
+<h3>The Only Time You’ll Copy-Pasta</h3>
+<p>Once you’ve got a set of code blocks in your Rmd you’re running regularly and are mostly happy with, move your functions into a new .R file!</p>
+</div>
+<div id="refactor-your-little-heart-out" class="section level3">
+<h3>Refactor Your Little Heart Out</h3>
+<p>The functions you’ve created are probably pretty big and complicated. You might find yourself repeating code inside of them. A good next step is to refactor these repeated units out into their own functions.</p>
+<p><code>{r get_the_pfunk}</code></p>
+</div>
+<div id="test-yourself" class="section level3">
+<h3>Test Yourself</h3>
+<p>If you plan to share your code (or refactor it regularly), you should consider writing unit tests to make it easy on yourself. I’ll cover getting into a testy state of mind in a future blog post!</p>
+</div>
+</div>
+</div>
+<div id="functional-design" class="section level1">
+<h1>Functional Design</h1>
+<p>The development of a skill is a journey and we should seek to improve ourselves through regular reflection and introspection. As you get more comfortable with your new functionality, challenge yourself to function better!</p>
+<p>When refactoring your functions, ponder the following questions:</p>
+<ul>
+<li>Who is going to use the function?</li>
+<li>How will the function be called?</li>
+<li>Who is going to maintain the function?</li>
+</ul>
+</div>
+<div id="tips-for-writing-functionally" class="section level1">
+<h1>Tips for Writing Functionally</h1>
+<div id="check-for-embedded-values" class="section level2">
+<h2>Check for embedded values</h2>
+<p>Use variables as much as possible!</p>
+</div>
+<div id="not-too-specific" class="section level2">
+<h2>Not Too Specific</h2>
+<p>Don’t just put a wrapper around another function.</p>
+<p>However, if you repeatedly modify the input value in some way, make that a function!</p>
+</div>
+<div id="not-too-complicated" class="section level2">
+<h2>Not Too Complicated</h2>
+<p>It’s ok to start out with a complicated function during development, but over time you want to move things out of it. You should do this as you encounter errors or need to reuse specific parts.</p>
+</div>
+<div id="return-something" class="section level2">
+<h2>Return Something</h2>
+<p>Returning a value makes it easier to check your results!</p>
+</div>
+<div id="watch-the-side-effects" class="section level2">
+<h2>Watch the Side Effects</h2>
+<p>Does you function modify anything other than the inputs being passed in? Usually this involves file I/O or external network requests.</p>
+<p>Ask yourself if it should! Alternatively, create a function that explicitly states that it’s performing that side effect (and make sure that’s pretty much all it does).</p>
+<p>Remember you don’t have to do everything in your function, you can always return a value and then use the standard library call to actually do the thing (see the print example above).</p>
+</div>
+<div id="document" class="section level2">
+<h2>Document!</h2>
+<p>Once you’ve got your functions in an R script, there’s fancy little tool called Roxygen<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> that can help you to keep your functions documented. In RStudio, you can automatically insert this template via the Code menu by selecting the option “Insert Roxygen Skeleton”.</p>
+</div>
+</div>
+<div id="last-callback" class="section level1">
+<h1>Last Callback</h1>
+<p>I hope the insights gleaned from my time in the code-slinging trenches has been helpful in your quest to find the “Func”. Please Tweet at me <a href="https://twitter.com/intent/tweet?url=http://rhappy.fun/blog/fun-with-r-functions&amp;text=I+want+the+funk+on+...+@mmmpork+@IBMCode&amp;hashtags=rstats,rladies">@mmmpork</a> if you have questions or not-questions (aka comments)!</p>
+<hr />
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>If this isn’t happening to you and your job function has something to with “data science” then you might be doing something more along the lines of data engineering (not actual data science). You can learn more about the scientific method and how to structure data science projects through Mine Çetinkaya-Rundel’s amazing Coursera series on R for Stats (individual classes are free to audit, only the program costs money): <a href="https://www.coursera.org/specializations/statistics" class="uri">https://www.coursera.org/specializations/statistics</a><a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p><a href="http://roxygen.org/" class="uri">http://roxygen.org/</a><a href="#fnref2">↩</a></p></li>
+</ol>
+</div>
+</div>
+
+
+    </div>
+    <div class="col-md-2">
+      <div id="toc">
+      	<button type="button" class="close">×</button>
+        <ul>
+        <li><a href="#why-function">Why Function?</a></li>
+        <li><a href="#functional-thinking">Functional Thinking</a><ul>
+        <li><a href="#research-is-different">Research is Different</a></li>
+        </ul></li>
+        <li><a href="#a-functional-data-frame-of-mind">A Functional Data-Frame of Mind</a><ul>
+        <li><a href="#verb-the-code-blocks">Verb the Code-blocks</a></li>
+        <li><a href="#moonwalk-driven-development">Moonwalk-Driven Development</a></li>
+        </ul></li>
+        <li><a href="#functional-design">Functional Design</a></li>
+        <li><a href="#tips-for-writing-functionally">Tips for Writing Functionally</a><ul>
+        <li><a href="#check-for-embedded-values">Check for embedded values</a></li>
+        <li><a href="#not-too-specific">Not Too Specific</a></li>
+        <li><a href="#not-too-complicated">Not Too Complicated</a></li>
+        <li><a href="#return-something">Return Something</a></li>
+        <li><a href="#watch-the-side-effects">Watch the Side Effects</a></li>
+        <li><a href="#document">Document!</a></li>
+        </ul></li>
+        <li><a href="#last-callback">Last Callback</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$(document).ready(function () {
+
+  // add bootstrap table styles to pandoc tables
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+
+});
+</script>
+
+<script>
+$(document).ready(function () {
+ 	    $('#content img')
+ 	  .addClass("image-lb");
+  $('#content').magnificPopup({
+	      type:'image',
+	      closeOnContentClick: false,
+	      delegate: 'img',
+	      gallery: {enabled: false },
+	      image: {
+	        verticalFit: true,
+          titleSrc: 'alt'
+	      }
+ 	    });
+ 	});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="fluid-row"><p align="center"><a href="https://github.com/missaugustina/RhappyFUNblog/blob/master/site/blog/fun-with-r-functions/fun-with-r-functions.Rmd">This post is available as Rmarkdown on Github</a></p></div></body>
+</html>

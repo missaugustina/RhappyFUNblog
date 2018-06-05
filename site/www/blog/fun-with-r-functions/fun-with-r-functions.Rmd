@@ -1,0 +1,389 @@
+---
+title: 'Putting the FUN into R Functions!'
+author: Augustina Ragwitz
+slug: fun-with-r-functions
+categories: []
+tags: []
+date: "`r Sys.Date()`"
+output:
+  rmdformats::html_clean:
+    highlight: kate
+    thumbnails: FALSE
+    fig_caption: yes
+    toc_depth: 2
+params:
+  slug: fun-with-r-functions
+---
+
+
+```{r knitr_init, echo=FALSE, cache=FALSE, include=FALSE}
+library(knitr)
+library(rmdformats)
+library(dplyr)
+
+## Global options
+options(max.print="75")
+opts_chunk$set(#echo=FALSE, # I want to show code blocks for this entry
+	             cache=FALSE,
+               prompt=FALSE,
+               tidy=TRUE,
+               comment=NA,
+               message=FALSE,
+               warning=FALSE,
+               fig.path = "img/")
+opts_knit$set(width=75)
+```
+
+```{r render_me, eval=FALSE, include=FALSE}
+library(here)
+commandArgs <- function(...) params$slug
+source(here::here("render_slug.R"))
+```
+
+# Why Function?
+
+Do you find yourself using a lot of copy-pasta code blocks? If you change something in one, you have to change it everywhere else! If you find yourself re-using the same code blocks over and over again, it will save you a lot of pain if you centralize them into a package or at least a few *.R files!
+
+> Functions allow you to write reusable code blocks that you can share with others. 
+
+> Functions also have the advantage of being testable, something that's not so easy to do with random code blocks. 
+
+# Functional Thinking
+
+In my former career life as a software engineer, I spent copious hours writing, debugging, and refactoring functions that were both functional and dysfunctional. I read up on best practices and attended tutorials and conference talks to learn how to function better. Eventually I found ultimate functionality in the Haskell programming language and like a true Haskell hipster lament the monadic lack in every other language I've used
+
+Eventually I became more interested in studying programmers than being one, going from Computer Scientist to Social Computer Scientist. I've been using R for a year and some change and have had to adapt to a hypothesis driven workflow reminiscent of my university days as an idealistic Anthropology major.
+
+Before diving into my Functional Philosophy, I want to take a moment to point out why, as a Data Scientist you might struggle with traditional approaches to software architecture.
+
+## Research is Different
+
+A traditional software engineering workflow starts with a requirement. Everyone is pretty clear about what a thing needs to do even if they aren't entirely sure how to get there.
+
+In research, you start with a very different set of requirements (depending on the nature of your research). At some point this should turn into a question which then should evolve into a hypothesis which ultimately spawns several more sub-hypotheses [^science].
+
+If these questions were easy to answer, they wouldn't be coming to me; they'd be giving the code monkeys the requirements and a deadline. 
+
+> Research is different from software engineering because you don't know where you're going to end up!
+
+# A Functional Data-Frame of Mind
+
+I love R markdown because I can document what I've tried on my research journey and it outputs a replayable and publishable format. It's easy to use and decreases the time from in-brain to out-of-brain.
+
+## Verb the Code-blocks
+
+Whenever I create an R codeblock that's going to do something other than display a plot, I give it a function-worthy name. I also find it helpful to pseudocode out what I want to do in this code block. 
+
+One strategy I use is to think about my function as having 3 main parts: In, The Business, Out
+
+`{r get_the_pfunk}`
+```{r get_the_pfunk_1, eval=FALSE}
+
+# In: The cut funk
+
+# The Business: Get the uncut funk from the P-Funk API
+
+# Out: The uncut funk
+
+```
+
+## Moonwalk-Driven Development
+
+One tenet I learned from Functional Programming: a function should always return something. To figure out what I need from my function, I start writing my code by doing something with the result at the end of the code block. 
+
+> Thinking about what you want to do with the output of your function helps to focus on why you're writing the code you're writing.
+
+What do you want to do with your end result?
+
+ * Print it?
+ * Plot it? 
+ * Write it out?
+
+`{r get_the_pfunk}`
+```{r get_the_pfunk_2, eval=FALSE}
+
+# In: The cut funk
+
+# The Business: Get the uncut funk from the P-Funk API
+
+# Out: The uncut funk
+
+write_rds(uncut_funk_df, "uncut_funk_df.Rds")
+```
+
+### I Do Declare
+
+Next, I declare my inputs at the top of the code block. This may require consulting package or API documentation (or both!). This step separates out what parameters your function will ultimately need to take. It also prevents you from accidentally embedding a value that will break once the function is fully encapsulated (R error messages are so helpful!).
+
+`{r get_the_pfunk}`
+```{r get_the_pfunk_3, eval=FALSE}
+
+# In: The cut funk
+cut_funks <- read_rds("cut_funks.Rds")
+
+# The Business: Get the uncut funk from the P-Funk API
+
+# Out: The uncut funk
+uncut_funk_df
+
+write_rds(uncut_funk_df, "uncut_funk_df.Rds")
+
+```
+
+### Make It So
+
+As you fill in the rest of the code, be sure to declare additional parameters at the top of the code block to keep track of them. You'll be doing a lot of reworking but at least having clear beginning and end points will keep it contained!
+
+`{r get_the_pfunk}`
+```{r get_the_pfunk_4, eval=FALSE}
+
+# In: The cut funk
+cut_funks <- read_rds("cut_funks.Rds")
+
+# We'll need a few more things to get all that funk!
+pfunk_api_params <- list(
+  client_id=params$pfunk_api_key,
+  funk_size=100
+)
+
+# The Business: Get the uncut funk from the P-Funk API
+uncut_funk_df <- data_frame()
+for f in (1:nrow(cut_funks)) {
+  # build request url
+  pfunk_api_url <- paste0("https://api.pfunk.fun/", f$name[n]) # <-- Do you have something to declare?
+  
+  # make api request
+  pfunk_api_req <- GET(pfunk_api_url, query=pfunk_api_params)
+  
+  # parse json output into dataframe
+  pfunk_api_json <- content(pfunk_api_req, as = "text")
+  pfunk_api_resp <- fromJSON(pfunk_api_json, flatten = TRUE)
+
+  # append to rest of responses
+  uncut_funk_df <- bind_rows(uncut_funk_df, pfunk_api_json)
+}
+
+# Out: The uncut funk
+uncut_funk_df
+
+write_rds(uncut_funk_df, "uncut_funk_df.Rds")
+
+```
+
+### Brace Yourself
+
+Once you've got a functional work flow, move the behavior in between a pair of curly braces as part of a function declaration. Refactor the part of your code where you're doing something with the output to call your function instead.
+
+`{r get_the_pfunk}`
+```{r get_the_pfunk_5, eval=FALSE}
+
+# In: The cut funk
+cut_funks <- read_rds("cut_funks.Rds")
+
+# We'll need a few more things to get all that funk!
+pfunk_api_params <- list(
+  client_id=params$pfunk_api_key,
+  funk_size=100
+)
+pfunk_api_base_url <- "https://api.pfunk.fun/"
+
+get_the_pfunk <- function(cut_funks, pfunk_api_base_url, pfunk_api_params) { # <-- these names don't have to match what's declared above!
+
+  # The Business: Get the uncut funk from the P-Funk API
+  uncut_funk_df <- data_frame()
+
+  for f in (1:nrow(cut_funks)) {
+    # build request url
+    pfunk_api_url <- paste0(pfunk_api_base_url, f$name[n])
+    
+    # make api request
+    pfunk_api_req <- GET(pfunk_api_url, 
+                         query=pfunk_api_params)
+    
+    # parse json output into dataframe
+    pfunk_api_json <- content(pfunk_api_req, as = "text")
+    pfunk_api_resp <- fromJSON(pfunk_api_json, flatten = TRUE)
+  
+    # append to rest of responses
+    uncut_funk_df <- bind_rows(uncut_funk_df, pfunk_api_json)
+  }
+}
+
+# Out: The uncut funk
+uncut_funk_df <- get_the_pfunk(pfunk_api_base_url, pfunk_api_params)
+
+write_rds(uncut_funk_df, "uncut_funk_df.Rds")
+
+```
+
+### The Only Time You'll Copy-Pasta
+
+Once you've got a set of code blocks in your Rmd you're running regularly and are mostly happy with, move your functions into a new .R file!
+
+### Refactor Your Little Heart Out
+
+The functions you've created are probably pretty big and complicated. You might find yourself repeating code inside of them. A good next step is to refactor these repeated units out into their own functions. 
+
+`{r get_the_pfunk}`
+```{r get_the_pfunk_6, eval=FALSE}
+
+# In: The cut funk
+cut_funks <- read_rds("cut_funks.Rds")
+
+# We'll need a few more things to get all that funk!
+pfunk_api_params <- list(
+  client_id=params$pfunk_api_key,
+  funk_size=100
+)
+pfunk_api_base_url <- "https://api.pfunk.fun/"
+
+get_pfunk_api_req(cut_funks, pfunk_api_url, pfunk_api_params) {
+  # make api request
+  pfunk_api_req <- GET(pfunk_api_url, 
+                         query=pfunk_api_params)
+    
+  # parse json output into dataframe
+  pfunk_api_json <- content(pfunk_api_req, as = "text")
+  pfunk_api_resp <- fromJSON(pfunk_api_json, flatten = TRUE)
+  
+  return(pfunk_api_resp)
+}
+
+get_the_pfunk <- function(cut_funks, pfunk_api_base_url, pfunk_api_params) {
+
+  # The Business: Get the uncut funk from the P-Funk API
+  uncut_funk_df <- data_frame()
+
+  for f in (1:nrow(cut_funks)) {
+    # build request url
+    pfunk_api_url <- paste0(pfunk_api_base_url, f$name[n])
+    
+    # call the pfunk api
+    pfunk_api_resp <- get_pfunk_api_req(pfunk_api_url, pfunk_api_params))
+  
+    # append to rest of responses
+    uncut_funk_df <- bind_rows(uncut_funk_df, pfunk_api_json)
+  }
+}
+
+# Out: The uncut funk
+uncut_funk_df <- get_the_pfunk(pfunk_api_base_url, pfunk_api_params)
+
+write_rds(uncut_funk_df, "uncut_funk_df.Rds")
+
+```
+
+### Test Yourself
+
+If you plan to share your code (or refactor it regularly), you should consider writing unit tests to make it easy on yourself. I'll cover getting into a testy state of mind in a future blog post!
+
+# Functional Design
+
+The development of a skill is a journey and we should seek to improve ourselves through regular reflection and introspection. As you get more comfortable with your new functionality, challenge yourself to function better!
+
+When refactoring your functions, ponder the following questions:
+
+ * Who is going to use the function?
+ * How will the function be called?
+ * Who is going to maintain the function?
+ 
+# Tips for Writing Functionally
+
+## Check for embedded values
+
+Use variables as much as possible!
+
+## Not Too Specific
+
+Don't just put a wrapper around another function.
+
+```{r eval=FALSE}
+print_the_funk <- function(the_funk) {
+  print(paste(the_funk))
+}
+
+```
+
+However, if you repeatedly modify the input value in some way, make that a function!
+
+```{r, eval=FALSE}
+
+parse_the_funk <- function(the_funk) {
+  the_new_funk <- the_funk %>%
+    filter(!is.na(bootsy))
+  
+  return(the_new_funk)
+}
+
+the_funk <- read_rds("the_funk.Rds")
+print(paste(parse_the_funk(the_funk)))
+
+```
+
+## Not Too Complicated
+
+It's ok to start out with a complicated function during development, but over time you want to move things out of it. You should do this as you encounter errors or need to reuse specific parts.
+
+```{r, eval=FALSE}
+
+# There's a whole lot of function going down!
+
+get_the_funk <- function(the_funk) {
+  
+  uncut_funk_df <- data_frame()
+
+  for f in (1:nrow(cut_funks)) {
+    # build request url
+    pfunk_api_url <- paste0(pfunk_api_base_url, f$name[n])
+    
+    # call the pfunk api
+    pfunk_api_resp <- get_pfunk_api_req(pfunk_api_url, pfunk_api_params))
+  
+    # append to rest of responses
+    uncut_funk_df <- bind_rows(uncut_funk_df, pfunk_api_json)
+  }
+
+  uncut_funk_df <- uncut_funk_df %>%
+    filter(!is.na(bootsy)) %>%
+    mutate(funk=str_replace(funk, "funk", "pfunk"))
+  
+  pfunk_api_2 <- get_pfunk_api_req(paste0(pfunk_api_url, "/planet"), pfunk_api_params))
+  uncut_funk_df <- bind_col(uncut_funk_df, pfunk_api_2$planet)
+  
+  uncut_funk_df <- uncut_funk_df %>%
+    group_by(planet) %>%
+    mutate(num_funks=n())
+  
+  save_rds(uncut_funk_df, "uncut_funk_df.Rds")
+  
+  return(uncut_funk_df)
+}
+
+the_funk <- read_rds("the_funk.Rds")
+print(paste(parse_the_funk(the_funk)))
+
+```
+
+## Return Something
+
+Returning a value makes it easier to check your results!
+
+## Watch the Side Effects
+
+Does you function modify anything other than the inputs being passed in? Usually this involves file I/O or external network requests. 
+
+Ask yourself if it should! Alternatively, create a function that explicitly states that it's performing that side effect (and make sure that's pretty much all it does). 
+
+Remember you don't have to do everything in your function, you can always return a value and then use the standard library call to actually do the thing (see the print example above).
+
+## Document!
+
+Once you've got your functions in an R script, there's fancy little tool called Roxygen[^roxygen] that can help you to keep your functions documented. In RStudio, you can automatically insert this template via the Code menu by selecting the option "Insert Roxygen Skeleton".
+
+# Last Callback
+
+I hope the insights gleaned from my time in the code-slinging trenches has been helpful in your quest to find the "Func". Please Tweet at me [\@mmmpork](https://twitter.com/intent/tweet?url=http://rhappy.fun/blog/fun-with-r-functions&text=I+want+the+funk+on+...+@mmmpork+@IBMCode&hashtags=rstats,rladies) if you have questions or not-questions (aka comments)!
+
+---
+[^science]: If this isn't happening to you and your job function has something to with "data science" then you might be doing something more along the lines of data engineering (not actual data science). You can learn more about the scientific method and how to structure data science projects through Mine Çetinkaya-Rundel's amazing Coursera series on R for Stats (individual classes are free to audit, only the program costs money): https://www.coursera.org/specializations/statistics
+[^roxygen]: http://roxygen.org/
