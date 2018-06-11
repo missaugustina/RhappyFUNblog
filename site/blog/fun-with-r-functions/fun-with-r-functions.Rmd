@@ -50,25 +50,25 @@ Do you find yourself using a lot of copy-pasta code blocks? If you change someth
 
 # Functional Thinking
 
-In my former career life as a software engineer, I spent copious hours writing, debugging, and refactoring functions that were both functional and dysfunctional. I read up on best practices and attended tutorials and conference talks to learn how to function better. Eventually I found ultimate functionality in the Haskell programming language and like a true Haskell hipster lament the monadic lack in every other language I've used
+In my former career life as a software engineer, I spent copious hours writing, debugging, and refactoring functions that were both functional and dysfunctional. I read up on best practices and attended tutorials and conference talks to learn how to function better. Eventually I found ultimate functionality in the Haskell programming language and like a true Haskell hipster lament the monadic lack in every other language I've used since!
 
-Eventually I became more interested in studying programmers than being one, going from Computer Scientist to Social Computer Scientist. I've been using R for a year and some change and have had to adapt to a hypothesis driven workflow reminiscent of my university days as an idealistic Anthropology major.
+Eventually I became more interested in studying programmers than in being one myself, transitioning from Computer Scientist to Social Computer Scientist. I've been using R for a year and some change and have had to adapt to a hypothesis driven workflow reminiscent of my university days as an idealistic Anthropology major.
 
-Before diving into my Functional Philosophy, I want to take a moment to point out why, as a Data Scientist you might struggle with traditional approaches to software architecture.
+Before diving into my Functional Philosophy, I want to take a moment to point out why, as a Data Scientist, you might struggle with traditional approaches to software architecture.
 
 ## Research is Different
 
-A traditional software engineering workflow starts with a requirement. Everyone is pretty clear about what a thing needs to do even if they aren't entirely sure how to get there.
+A traditional software engineering workflow starts with a set of requirements. Everyone is pretty clear about what a thing needs to do even if they aren't entirely sure how to get there.
 
-In research, you start with a very different set of requirements (depending on the nature of your research). At some point this should turn into a question which then should evolve into a hypothesis which ultimately spawns several more sub-hypotheses [^science].
+In research, you start with a very different set of requirements (depending on the nature of your research). At some point this should turn into a question which then should evolve into a hypothesis which ultimately spawns several more sub-hypotheses. [^science]
 
-If these questions were easy to answer, they wouldn't be coming to me; they'd be giving the code monkeys the requirements and a deadline. 
+If these questions were easy to answer, the questioners wouldn't be coming to us; they'd be giving the code monkeys the requirements and a deadline! 
 
 > Research is different from software engineering because you don't know where you're going to end up!
 
 # A Functional Data-Frame of Mind
 
-I love R markdown because I can document what I've tried on my research journey and it outputs a replayable and publishable format. It's easy to use and decreases the time from in-brain to out-of-brain.
+I am a huge fan of R markdown because I can document what I've tried on my research journey and share it in a replayable and publishable format. R markdown is easy to use and decreases the time from in-my-brain to out-my-brain.
 
 ## Verb the Code-blocks
 
@@ -88,9 +88,9 @@ One strategy I use is to think about my function as having 3 main parts: In, The
 ```
 ## Moonwalk-Driven Development
 
-One tenet I learned from Functional Programming: a function should always return something. To figure out what I need from my function, I start writing my code by doing something with the result at the end of the code block. 
+A tenet I learned from Functional Programming: a function should always return something. To figure out what I need from my function, I start writing my code by doing something with the result at the end of the code block. 
 
-> Thinking about what you want to do with the output of your function helps to focus on why you're writing the code you're writing.
+> Thinking about what you want to do with the output forces you to focus on why you're writing the code you're writing.
 
 What do you want to do with your end result?
 
@@ -131,7 +131,7 @@ write_rds(uncut_funk_df, "uncut_funk_df.Rds")
 
 ### Make It So
 
-As you fill in the rest of the code, be sure to declare additional parameters at the top of the code block to keep track of them. You'll be doing a lot of reworking but at least having clear beginning and end points will keep it contained!
+As you fill in the rest of the code, declare additional parameters at the top of the code block to keep track of them. You'll be doing a lot of reworking but at least having clear beginning and end points will keep it contained!
 
 ```
 {r get_the_pfunk}
@@ -278,7 +278,7 @@ If you plan to share your code (or refactor it regularly), you should consider w
 
 # Functional Design
 
-The development of a skill is a journey and we should seek to improve ourselves through regular reflection and introspection. As you get more comfortable with your new functionality, challenge yourself to function better!
+The development of any skill is a journey that requires regular reflection and introspection. As you get more comfortable with your new functionality, challenge yourself to function better!
 
 When refactoring your functions, ponder the following questions:
 
@@ -287,10 +287,6 @@ When refactoring your functions, ponder the following questions:
  * Who is going to maintain the function?
  
 # Tips for Writing Functionally
-
-## Check for embedded values
-
-Use variables as much as possible!
 
 ## Not Too Specific
 
@@ -361,6 +357,10 @@ print(paste(parse_the_funk(the_funk)))
 
 ```
 
+## Check for embedded values
+
+Use variables as much as possible!
+
 ## Return Something
 
 Returning a value makes it easier to check your results!
@@ -382,5 +382,5 @@ Once you've got your functions in an R script, there's fancy little tool called 
 I hope the insights gleaned from my time in the code-slinging trenches has been helpful in your quest to find the "Func". Please Tweet at me [\@mmmpork](https://twitter.com/intent/tweet?url=http://rhappy.fun/blog/fun-with-r-functions&text=I+want+the+funk+on+...+@mmmpork+@IBMCode&hashtags=rstats,rladies) if you have questions or not-questions (aka comments)!
 
 ---
-[^science]: If this isn't happening to you and your job function has something to with "data science" then you might be doing something more along the lines of data engineering (not actual data science). You can learn more about the scientific method and how to structure data science projects through Mine Çetinkaya-Rundel's amazing Coursera series on R for Stats (individual classes are free to audit, only the program costs money): https://www.coursera.org/specializations/statistics
+[^science]: If this isn't happening to you and your job function has something to with "data science" then you might be doing something more along the lines of data engineering (not actual science). You can learn more about the scientific method and how to structure data science projects through Mine Çetinkaya-Rundel's amazing Coursera series on R for Stats (individual classes are free to audit, only the program certificate costs money): https://www.coursera.org/specializations/statistics
 [^roxygen]: http://roxygen.org/
