@@ -83,14 +83,14 @@ img {
 </div>
 <div id="functional-thinking" class="section level1">
 <h1>Functional Thinking</h1>
-<p>In my former career life as a software engineer, I spent copious hours writing, debugging, and refactoring functions that were both functional and dysfunctional. I read up on best practices and attended tutorials and conference talks to learn how to function better. Eventually I found ultimate functionality in the Haskell programming language and like a true Haskell hipster lament the monadic lack in every other language I’ve used</p>
-<p>Eventually I became more interested in studying programmers than being one, going from Computer Scientist to Social Computer Scientist. I’ve been using R for a year and some change and have had to adapt to a hypothesis driven workflow reminiscent of my university days as an idealistic Anthropology major.</p>
-<p>Before diving into my Functional Philosophy, I want to take a moment to point out why, as a Data Scientist you might struggle with traditional approaches to software architecture.</p>
+<p>In my former career life as a software engineer, I spent copious hours writing, debugging, and refactoring functions that were both functional and dysfunctional. I read up on best practices and attended tutorials and conference talks to learn how to function better. Eventually I found ultimate functionality in the Haskell programming language and like a true Haskell hipster lament the monadic lack in every other language I’ve used since!</p>
+<p>Eventually I became more interested in studying programmers than in being one myself, transitioning from Computer Scientist to Social Computer Scientist. I’ve been using R for a year and some change and have had to adapt to a hypothesis driven workflow reminiscent of my university days as an idealistic Anthropology major.</p>
+<p>Before diving into my Functional Philosophy, I want to take a moment to point out why, as a Data Scientist, you might struggle with traditional approaches to software architecture.</p>
 <div id="research-is-different" class="section level2">
 <h2>Research is Different</h2>
-<p>A traditional software engineering workflow starts with a requirement. Everyone is pretty clear about what a thing needs to do even if they aren’t entirely sure how to get there.</p>
-<p>In research, you start with a very different set of requirements (depending on the nature of your research). At some point this should turn into a question which then should evolve into a hypothesis which ultimately spawns several more sub-hypotheses <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</p>
-<p>If these questions were easy to answer, they wouldn’t be coming to me; they’d be giving the code monkeys the requirements and a deadline.</p>
+<p>A traditional software engineering workflow starts with a set of requirements. Everyone is pretty clear about what a thing needs to do even if they aren’t entirely sure how to get there.</p>
+<p>In research, you start with a very different set of requirements (depending on the nature of your research). At some point this should turn into a question which then should evolve into a hypothesis which ultimately spawns several more sub-hypotheses. <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
+<p>If these questions were easy to answer, the questioners wouldn’t be coming to us; they’d be giving the code monkeys the requirements and a deadline!</p>
 <blockquote>
 <p>Research is different from software engineering because you don’t know where you’re going to end up!</p>
 </blockquote>
@@ -98,7 +98,7 @@ img {
 </div>
 <div id="a-functional-data-frame-of-mind" class="section level1">
 <h1>A Functional Data-Frame of Mind</h1>
-<p>I love R markdown because I can document what I’ve tried on my research journey and it outputs a replayable and publishable format. It’s easy to use and decreases the time from in-brain to out-of-brain.</p>
+<p>I am a huge fan of R markdown because I can document what I’ve tried on my research journey and share it in a replayable and publishable format. R markdown is easy to use and decreases the time from in-my-brain to out-my-brain.</p>
 <div id="verb-the-code-blocks" class="section level2">
 <h2>Verb the Code-blocks</h2>
 <p>Whenever I create an R codeblock that’s going to do something other than display a plot, I give it a function-worthy name. I also find it helpful to pseudocode out what I want to do in this code block.</p>
@@ -114,9 +114,9 @@ img {
 </div>
 <div id="moonwalk-driven-development" class="section level2">
 <h2>Moonwalk-Driven Development</h2>
-<p>One tenet I learned from Functional Programming: a function should always return something. To figure out what I need from my function, I start writing my code by doing something with the result at the end of the code block.</p>
+<p>A tenet I learned from Functional Programming: a function should always return something. To figure out what I need from my function, I start writing my code by doing something with the result at the end of the code block.</p>
 <blockquote>
-<p>Thinking about what you want to do with the output of your function helps to focus on why you’re writing the code you’re writing.</p>
+<p>Thinking about what you want to do with the output forces you to focus on why you’re writing the code you’re writing.</p>
 </blockquote>
 <p>What do you want to do with your end result?</p>
 <ul>
@@ -151,7 +151,7 @@ write_rds(uncut_funk_df, &quot;uncut_funk_df.Rds&quot;)
 </div>
 <div id="make-it-so" class="section level3">
 <h3>Make It So</h3>
-<p>As you fill in the rest of the code, be sure to declare additional parameters at the top of the code block to keep track of them. You’ll be doing a lot of reworking but at least having clear beginning and end points will keep it contained!</p>
+<p>As you fill in the rest of the code, declare additional parameters at the top of the code block to keep track of them. You’ll be doing a lot of reworking but at least having clear beginning and end points will keep it contained!</p>
 <pre><code>{r get_the_pfunk}
 
 # In: The cut funk
@@ -291,7 +291,7 @@ write_rds(uncut_funk_df, &quot;uncut_funk_df.Rds&quot;)
 </div>
 <div id="functional-design" class="section level1">
 <h1>Functional Design</h1>
-<p>The development of a skill is a journey and we should seek to improve ourselves through regular reflection and introspection. As you get more comfortable with your new functionality, challenge yourself to function better!</p>
+<p>The development of any skill is a journey that requires regular reflection and introspection. As you get more comfortable with your new functionality, challenge yourself to function better!</p>
 <p>When refactoring your functions, ponder the following questions:</p>
 <ul>
 <li>Who is going to use the function?</li>
@@ -301,10 +301,6 @@ write_rds(uncut_funk_df, &quot;uncut_funk_df.Rds&quot;)
 </div>
 <div id="tips-for-writing-functionally" class="section level1">
 <h1>Tips for Writing Functionally</h1>
-<div id="check-for-embedded-values" class="section level2">
-<h2>Check for embedded values</h2>
-<p>Use variables as much as possible!</p>
-</div>
 <div id="not-too-specific" class="section level2">
 <h2>Not Too Specific</h2>
 <p>Don’t just put a wrapper around another function.</p>
@@ -364,6 +360,10 @@ the_funk &lt;- read_rds(&quot;the_funk.Rds&quot;)
 print(paste(parse_the_funk(the_funk)))
 </code></pre>
 </div>
+<div id="check-for-embedded-values" class="section level2">
+<h2>Check for embedded values</h2>
+<p>Use variables as much as possible!</p>
+</div>
 <div id="return-something" class="section level2">
 <h2>Return Something</h2>
 <p>Returning a value makes it easier to check your results!</p>
@@ -387,7 +387,7 @@ print(paste(parse_the_funk(the_funk)))
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>If this isn’t happening to you and your job function has something to with “data science” then you might be doing something more along the lines of data engineering (not actual data science). You can learn more about the scientific method and how to structure data science projects through Mine Çetinkaya-Rundel’s amazing Coursera series on R for Stats (individual classes are free to audit, only the program costs money): <a href="https://www.coursera.org/specializations/statistics" class="uri">https://www.coursera.org/specializations/statistics</a><a href="#fnref1">↩</a></p></li>
+<li id="fn1"><p>If this isn’t happening to you and your job function has something to with “data science” then you might be doing something more along the lines of data engineering (not actual science). You can learn more about the scientific method and how to structure data science projects through Mine Çetinkaya-Rundel’s amazing Coursera series on R for Stats (individual classes are free to audit, only the program certificate costs money): <a href="https://www.coursera.org/specializations/statistics" class="uri">https://www.coursera.org/specializations/statistics</a><a href="#fnref1">↩</a></p></li>
 <li id="fn2"><p><a href="http://roxygen.org/" class="uri">http://roxygen.org/</a><a href="#fnref2">↩</a></p></li>
 </ol>
 </div>
@@ -409,9 +409,9 @@ print(paste(parse_the_funk(the_funk)))
         </ul></li>
         <li><a href="#functional-design">Functional Design</a></li>
         <li><a href="#tips-for-writing-functionally">Tips for Writing Functionally</a><ul>
-        <li><a href="#check-for-embedded-values">Check for embedded values</a></li>
         <li><a href="#not-too-specific">Not Too Specific</a></li>
         <li><a href="#not-too-complicated">Not Too Complicated</a></li>
+        <li><a href="#check-for-embedded-values">Check for embedded values</a></li>
         <li><a href="#return-something">Return Something</a></li>
         <li><a href="#watch-the-side-effects">Watch the Side Effects</a></li>
         <li><a href="#document">Document!</a></li>
