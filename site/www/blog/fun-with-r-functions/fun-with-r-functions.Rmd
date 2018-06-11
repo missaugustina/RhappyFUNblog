@@ -40,7 +40,7 @@ commandArgs <- function(...) params$slug
 source(here::here("render_slug.R"))
 ```
 
-# Why Function?
+# Why Do You Function?
 
 Do you find yourself using a lot of copy-pasta code blocks? If you change something in one, you have to change it everywhere else! If you find yourself re-using the same code blocks over and over again, it will save you a lot of pain if you centralize them into a package or at least a few *.R files!
 
