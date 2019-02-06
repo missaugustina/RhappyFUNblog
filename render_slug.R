@@ -24,7 +24,7 @@ if (str_detect(blog_html[max(blog_li)], slug)) {
   print(paste("Already appended", slug, "skipping"))
 } else {
   slug_li <- paste("<li><a href=\"blog/", slug, "/index.html\">", Sys.Date(), ": ", slug, "</a></li>", sep="")
-  blog_html_new <- c(blog_html[1:max(blog_li)], slug_li, blog_html[(max(blog_li)+1):length(blog_html)])
+  blog_html_new <- c(blog_html[1:min(blog_li)], slug_li, blog_html[(min(blog_li)+1):length(blog_html)])
   write_lines(blog_html_new, here::here("site", "www", "blog.html"))
   print(paste("Appended new blog entry to index:", slug_li))
 }
