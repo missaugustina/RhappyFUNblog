@@ -13,13 +13,27 @@ render(here::here("site", "blog", slug, paste0(slug, ".Rmd")),
   output_file=here::here("site", "blog", slug, "index.html"),
   output_options = c(self_contained=FALSE))
 
-render_site(here::here("site", "blog.Rmd"))
+# TODO creation time isn't preserved by git apparently
+# render_site(here::here("site", "blog.Rmd"))
+blog_html <- read_lines(here::here("site", "www", "blog.html"))
+
+# add new post to index
+blog_li <- which(str_detect(blog_html, "</a></li>"))
+# check if it's already been added
+if (str_detect(blog_html[max(blog_li)], slug)) {
+  print(paste("Already appended", slug, "skipping"))
+} else {
+  slug_li <- paste("<li><a href=\"blog/", slug, "/index.html\">", Sys.Date(), ": ", slug, "</a></li>", sep="")
+  blog_html_new <- c(blog_html[1:max(blog_li)], slug_li, blog_html[(max(blog_li)+1):length(blog_html)])
+  write_lines(blog_html_new, here::here("site", "www", "blog.html"))
+  print(paste("Appended new blog entry to index:", slug_li))
+}
+
 
 # add nav html to blog post
 blog_slug_html <- read_lines(here::here("site", "blog", slug, "index.html"))
 
 # extract nav
-blog_html <- read_lines(here::here("site", "www", "blog.html"))
 blog_html_nav <- 
   str_extract(paste(blog_html, collapse=""), "<div class=\"navbar navbar-default  navbar-fixed-top\" role=\"navigation\">.*</div><!--/.navbar -->")
 
@@ -46,10 +60,12 @@ print(paste("removing", blog_slug_nav[mathjax_line:(mathjax_line+8)]))
 blog_slug_nav[mathjax_line:(mathjax_line+8)] = ""
 
 # run the full site rendering
+# update rendered blog entry html with nav html pulled from main pages
 write_lines(blog_slug_nav, here::here("site", "blog", slug,"index.html"))
 
 # Something is breaking the navigation layout when running render_site and passing in all files
 # render_site(here::here("site"))
 site_files <- list.files(path=here::here("site"), pattern="*.Rmd", full.names = FALSE)
-site_files %>% map(~ render_site(here::here("site", .x)))
+# TODO have to fix stuff, in the meantime, these have to be updated manually
+# site_files %>% map(~ render_site(here::here("site", .x)))
 

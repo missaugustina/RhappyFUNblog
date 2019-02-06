@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="author" content="Augustina Ragwitz" />
+
+<meta name="date" content="2019-02-05" />
+
+<title>Hello Keras!</title>
+
+<script src="index_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="index_files/bootstrap-3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+<script src="index_files/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+<script src="index_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<script src="index_files/navigation-1.1/tabsets.js"></script>
+<script src="index_files/navigation-1.1/codefolding.js"></script>
+<link href="index_files/magnific-popup-1.1.0/magnific-popup.css" rel="stylesheet" />
+<script src="index_files/magnific-popup-1.1.0/jquery.magnific-popup.min.js"></script>
+<link href="index_files/clean-0.1/clean.css" rel="stylesheet" />
+<script src="index_files/clean-0.1/clean.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #ffffff; color: #1f1c1b; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; background-color: #ffffff; color: #a0a0a0; border-right: 1px solid #a0a0a0; }
+td.sourceCode { padding-left: 5px; }
+pre, code { color: #1f1c1b; background-color: #ffffff; }
+code > span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code > span.dt { color: #0057ae; } /* DataType */
+code > span.dv { color: #b08000; } /* DecVal */
+code > span.bn { color: #b08000; } /* BaseN */
+code > span.fl { color: #b08000; } /* Float */
+code > span.cn { color: #aa5500; } /* Constant */
+code > span.ch { color: #924c9d; } /* Char */
+code > span.sc { color: #3daee9; } /* SpecialChar */
+code > span.st { color: #bf0303; } /* String */
+code > span.vs { color: #bf0303; } /* VerbatimString */
+code > span.ss { color: #ff5500; } /* SpecialString */
+code > span.im { color: #ff5500; } /* Import */
+code > span.co { color: #898887; } /* Comment */
+code > span.do { color: #607880; } /* Documentation */
+code > span.an { color: #ca60ca; } /* Annotation */
+code > span.cv { color: #0095ff; } /* CommentVar */
+code > span.ot { color: #006e28; } /* Other */
+code > span.fu { color: #644a9b; } /* Function */
+code > span.va { color: #0057ae; } /* Variable */
+code > span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #1f1c1b; } /* Operator */
+code > span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code > span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code > span.pp { color: #006e28; } /* Preprocessor */
+code > span.at { color: #0057ae; } /* Attribute */
+code > span.re { color: #0057ae; } /* RegionMarker */
+code > span.in { color: #b08000; } /* Information */
+code > span.wa { color: #bf0303; } /* Warning */
+code > span.al { color: #bf0303; font-weight: bold; } /* Alert */
+code > span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code > span. { color: #1f1c1b; } /* Normal */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+</style>
+<div class="container-fluid main-container"><div class="navbar navbar-default  navbar-fixed-top" role="navigation">  <div class="container">    <div class="navbar-header">      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">        <span class="icon-bar"></span>        <span class="icon-bar"></span>        <span class="icon-bar"></span>      </button>      <a class="navbar-brand" href="../../index.html">R Happy</a>    </div>    <div id="navbar" class="navbar-collapse collapse">      <ul class="nav navbar-nav">        <li>  <a href="../../index.html">FUN!</a></li><li>  <a href="../../blog.html">Blog</a></li><li>  <a href="../../research.html">Research</a></li><li>  <a href="../../music.html">Music</a></li>      </ul>      <ul class="nav navbar-nav navbar-right">              </ul>    </div><!--/.nav-collapse -->  </div><!--/.container --></div><!--/.navbar --><div class="fluid-row"><br /><br /><br /></div>
+  <div class="row">
+     <div class="col-md-10">
+
+
+
+
+<div id="header">
+<h1 class="title">Hello Keras!</h1>
+<h4 class="author"><em>Augustina Ragwitz</em></h4>
+<h4 class="date"><em>2019-02-05</em></h4>
+</div>
+
+<div id="content">
+<p>This is a tutorial I put together around this time last year after RStudio’s demonstration of their integrated support for Tensorflow at RStudio::conf. I also updated it for a hacking table I ran with <a href="https://twitter.com/gdequeiroz">Gabriela de Queiroz</a> at the Tensorflow Community Day (OSCON 2018). I’ve been continuing to do little tutorials here and there, but in the past few months I finally figured out what I want to use all this crazy stuff for, so stay tuned! In the meantime, I’ll be updating this blog with tidbits I learn as I go through my Derp Learning journey.</p>
+<div id="library" class="section level2">
+<h2>Library</h2>
+<p>We’re using RStudio’s Keras Library.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(here)
+<span class="kw">library</span>(keras)
+<span class="kw">library</span>(tidyverse)</code></pre></div>
+</div>
+<div id="the-question" class="section level2">
+<h2>The Question</h2>
+<p>Can we identify single digit numbers from hand-writing?</p>
+<p>We need to simplify this for our model, as is typical when testing a hypothesis. The question we have for this experiment is “What number is in this picture?”</p>
+<p>In this example, we are essentially testing the results of another research effort ^[[Y. LeCun, L. Bottou, Y. Bengio, and P. Haffner. “Gradient-based learning applied to document recognition.” Proceedings of the IEEE, 86(11):2278-2324, November 1998.(<a href="http://yann.lecun.com/exdb/publis/index.html#lecun-98" class="uri">http://yann.lecun.com/exdb/publis/index.html#lecun-98</a>)].</p>
+</div>
+<div id="the-data---mnist-database" class="section level2">
+<h2>The Data - MNIST database</h2>
+<p>The MNIST (Modified National Institute of Standards and Technology) is a collection of handwritten, single-digit numbers. To learn more, <a href="https://en.wikipedia.org/wiki/MNIST_database">read the Wikipedia entry</a>.</p>
+<div id="how-do-we-get-it" class="section level3">
+<h3>How do we get it?</h3>
+<p>The <code>dataset_mnist()</code> function fetches a formatted archive of the MNIST database that can be consumed in R. This function will cache the dataset locally by default by saving it in ~/.keras/datasets.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mnist &lt;-<span class="st"> </span><span class="kw">dataset_mnist</span>()</code></pre></div>
+</div>
+<div id="whats-in-it" class="section level3">
+<h3>What’s in it?</h3>
+<p>We have 2 lists, a set of images and a set of labels. The labels map to the images in a 1:1 relationship. That is, the label’s index matches the image’s index. Our machine will “learn” by looking for similarities between items that have the same label (called “features”).</p>
+<p>An annotated dataset is one that has labeled content depending on what our end goal is. In this case, the annotations have already been parsed into a structured dataset for our program to consume, but often you’ll need to do this parsing yourself. R has some handy tools for streamlining this process (see package <code>tfdatasets</code>).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(mnist<span class="op">$</span>train)</code></pre></div>
+<pre><code>List of 2
+ $ x: int [1:60000, 1:28, 1:28] 0 0 0 0 0 0 0 0 0 0 ...
+ $ y: int [1:60000(1d)] 5 0 4 1 9 2 1 3 1 4 ...</code></pre>
+<div class="figure">
+<img src="img/MnistExamples.png" alt="Josef Steppan - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=64810040" />
+<p class="caption">Josef Steppan - Own work, CC BY-SA 4.0, <a href="https://commons.wikimedia.org/w/index.php?curid=64810040" class="uri">https://commons.wikimedia.org/w/index.php?curid=64810040</a></p>
+</div>
+<p>You might notice our dataset contains 2 lists, train and test. Each is the exact same structure but contains different data. We’ll talk about why later.</p>
+</div>
+<div id="how-do-we-cite-it" class="section level3">
+<h3>How do we cite it?</h3>
+<p>One shortcoming of the <code>dataset_mnist()</code> function is it does not provide a citation entry. In R, datasets are often provided as standalone packages that can be cited using the <code>citations()</code> function.</p>
+<p>LeCun, Yann; Corinna Cortes; Christopher J.C. Burges. (1998). MNIST handwritten digit database [Data file]. Retrieved from <a href="https://s3.amazonaws.com/img-datasets/mnist.npz" class="uri">https://s3.amazonaws.com/img-datasets/mnist.npz</a></p>
+<ul>
+<li>Author/Rightsholder. (Year). Title of data set (Version number) [Description of form]. Retrieved from (url) <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></li>
+<li><a href="https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html">Use RMarkdown to generate bibliography</a></li>
+<li><a href="https://stat.ethz.ch/R-manual/R-devel/library/utils/html/citation.html">Use citations() for packages</a></li>
+</ul>
+<p>Why do you think citing your data sources is important?</p>
+</div>
+</div>
+<div id="data-format" class="section level2">
+<h2>Data Format</h2>
+<p>Before we can do the deep learnings, we must format our data into something our model can process for comparison. Remember, the model needs to discover what’s similar between things that have the same label. Our data needs to match what’s required for the function (or mathmatical equation) that will be used to do this comparison</p>
+<div id="making-a-tensor" class="section level3">
+<h3>Making a Tensor</h3>
+<p>We have two lists, labels and images. Labels and images have a 1:1 mapping.</p>
+<p>Our end goal is to connect the labels to the images.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">train_images &lt;-<span class="st"> </span>mnist<span class="op">$</span>train<span class="op">$</span>x
+train_labels &lt;-<span class="st"> </span>mnist<span class="op">$</span>train<span class="op">$</span>y</code></pre></div>
+<p>We will to be vectorize the lists into a binary matrix, aka a Tensor.</p>
+<p>What kind of Tensor are we using?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(<span class="st">&quot;How many dimensions does this tensor have?&quot;</span>)</code></pre></div>
+<pre><code>[1] &quot;How many dimensions does this tensor have?&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(<span class="kw">dim</span>(train_images))</code></pre></div>
+<pre><code>[1] 3</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(<span class="st">&quot;What shape does this tensor have?&quot;</span>)</code></pre></div>
+<pre><code>[1] &quot;What shape does this tensor have?&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(train_images)</code></pre></div>
+<pre><code>[1] 60000    28    28</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(<span class="st">&quot;What datatype does this tensor have?&quot;</span>)</code></pre></div>
+<pre><code>[1] &quot;What datatype does this tensor have?&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(train_images)</code></pre></div>
+<pre><code>[1] &quot;integer&quot;</code></pre>
+<p>What’s actually in the dataset?</p>
+<p>The first axis (or dimension) is known as the sample axis. If we take a sample out of it, we can display it using the plot function in the R keras library. R provides a function called “as.raster” that tells plot() how to render the data we’re passing in.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># grab a random index from the &quot;batch&quot; index (the first axis)</span>
+digit_index &lt;-<span class="st"> </span><span class="kw">sample.int</span>(<span class="kw">length</span>(train_images[<span class="dv">1</span>,,]), <span class="dv">1</span>) 
+digit &lt;-<span class="st"> </span>train_images[digit_index,,] <span class="co"># &lt;- one slice of tensor please :)</span>
+
+<span class="kw">plot</span>(<span class="kw">as.raster</span>(digit, <span class="dt">max=</span><span class="dv">255</span>))</code></pre></div>
+<p><img src="img/unnamed-chunk-3-1.png" width="576" /></p>
+</div>
+</div>
+<div id="data-encoding" class="section level2">
+<h2>Data Encoding</h2>
+<div id="tensor-reshaping" class="section level3">
+<h3>Tensor Reshaping</h3>
+<p>To take advantage of the features R Keras offers, our data should be formatted in a way that the <code>array_reshape()</code> function can work with. Our end goal is something that can be used for Tensor Operations.</p>
+<p>How of you know what shape you need? Generally you can follow the guidelines based on the nature of your question. In this case, we are following a basic “recipe” for image recognition.</p>
+<p>We have a 3D array containing image content, width, height 1. Convert width and height into a single value 1. Convert the image content into value between 1 and 255</p>
+</div>
+<div id="one-hot-encoding" class="section level3">
+<h3>One Hot Encoding</h3>
+<p>Convert to a vector of 0’s and 1’s where the items in the list index are 1 at the appropriate location.</p>
+<p>In this example, we transform it into a double array of shape <code>(60000, 28 * 28)</code> with values between 0 and 1.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">train_images &lt;-<span class="st"> </span><span class="kw">array_reshape</span>(train_images, <span class="kw">c</span>(<span class="dv">60000</span>, <span class="dv">28</span> <span class="op">*</span><span class="st"> </span><span class="dv">28</span>))
+train_images &lt;-<span class="st"> </span>train_images <span class="op">/</span><span class="st"> </span><span class="dv">255</span>
+
+<span class="co"># Uncomment to get a peak at what&#39;s inside!</span>
+<span class="co"># head(train_images)</span></code></pre></div>
+</div>
+<div id="labels" class="section level3">
+<h3>Labels</h3>
+<p>We’ve encoded the images, but also need to categorically encode the labels so the model knows how to bucket things. We will be using the <code>categorical_crossentropy()</code> loss function (discussed in the next section), so this method is dictated to us as part of our image recognition recipe. For more information, look at the help entry for /Users/auggy/Library/R/3.5/library/keras/help/to_categorical.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">train_labels &lt;-<span class="st"> </span><span class="kw">to_categorical</span>(train_labels)</code></pre></div>
+<p>What format does training data generally need to be in? This depends on your question and the methods you will use to run your experiments.</p>
+</div>
+</div>
+<div id="the-model-aka-network" class="section level2">
+<h2>The Model (aka Network)</h2>
+<p>A model in Keras is a directed acyclic graph of layers. A graph can also be thought of a network or a map of interconnected points. The connections are “weights” that indicate how each point is related to each other.</p>
+<div class="figure">
+<img src="img/graph_example.png" alt="Example of what a graph looks like" />
+<p class="caption">Example of what a graph looks like</p>
+</div>
+<p>The state of the graph (or rather the weights of the connections) are updated as it is trained.</p>
+<p>To define our question in terms the model can understand, we’ll use layer functions. Each layer function will perform a mathmatical transformation on the dataset and provide a result in a format that lets us “answer” our question. Again, this is dependent on the type of question. In our case we want the model to tell us if an image contains a particular digit.</p>
+<p>Models, however, are not going to give us a simple yes or no. Think of it more like a Zen Guru. The final output the model will provide is, given all of the categories, here’s the probability that the number is in this picture. It’s up to us to interpret the results.</p>
+<p>Here’s the first bit of code to set up our model.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">keras_model_sequential</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># initialize our model using a pre-baked model type (thanks R keras!)</span>
+<span class="st">  </span><span class="kw">layer_dense</span>(<span class="dt">units =</span> <span class="dv">512</span>, <span class="dt">activation =</span> <span class="st">&quot;relu&quot;</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">28</span> <span class="op">*</span><span class="st"> </span><span class="dv">28</span>), 
+              <span class="dt">name=</span><span class="st">&quot;image&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># define our first layer transformation</span>
+<span class="st">  </span><span class="kw">layer_dense</span>(<span class="dt">units =</span> <span class="dv">10</span>, <span class="dt">activation =</span> <span class="st">&quot;softmax&quot;</span>, <span class="dt">name=</span><span class="st">&quot;prediction&quot;</span>) <span class="co"># define the final layer transformation</span></code></pre></div>
+<div id="keras_model_sequential" class="section level3">
+<h3>keras_model_sequential</h3>
+<p>R keras provides some “pre-baked” models (much like using a pre-made ingredient instead of cooking everything from scratch). If we look at the help entry, it tells us our model is composed of a linear stack of layers.</p>
+<p>By using this function, R keras will send the configuration options to Keras and ultimately Tensorflow so we don’t have to fiddle with it.</p>
+<p>/Users/auggy/Library/R/3.5/library/keras/help/keras_model_sequential</p>
+</div>
+<div id="layers" class="section level3">
+<h3>Layers</h3>
+<p>What are layers?</p>
+<p>Layers are representations of the data that will be chained together for the deep learnings. Remember the connections in the graph? That’s essentially what the layer function is building. As each layer function is applied to the dataset, the result then goes to the next layer function we’ve defined.</p>
+<p>Ultimately, we want to get from many parameters to a set of probabilities. This data transformation can get pretty complex and it is one of the reasons why transparency in deep learning is challenging.</p>
+<p>We will not discuss the “how” only the “why” so advanced apologies for the hand-waving in place of the actual math. If you want to dig deeper, see the resources mentioned at the end of this notebook.</p>
+<ul>
+<li>units</li>
+<li>activation</li>
+<li>input_shape</li>
+</ul>
+<div id="types-of-layers" class="section level4">
+<h4>Types of Layers</h4>
+<p>For image perception problems, two layer types we’ll discuss are “dense” and “convnet” <a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>.</p>
+<p>The <code>layer_dense()</code> function indicates we are using “dense” layers. Dense layers are intended to process vectors with no specific structure to the input features. The units of a dense later are all connected and the layer function attempts to map relationships between any features.</p>
+<p>The key difference between a dense layer and a 2D convolution layer is that the convolution layer additionally learns “local” patterns of features, rather than considering all of them each iteration.</p>
+<p>The advantage to using a Convnet is we can see how the image perception was transformed over time. We’ll take a look at that after we finish training our first example. The takeaway here is there are many types of layers that dictate how we need the data transformed so the model can answer our question. It’s up to you to find the best approach depending on the nature of your question.</p>
+</div>
+</div>
+<div id="tensor-operations" class="section level3">
+<h3>Tensor Operations</h3>
+<p>When our model does its magic, it will reduce many values into a single value.</p>
+<p>Why a single value? Because ultimately we’re trying to get to a “gradient”. The gradient is the change (curve or interval) of a tensor operation. Basically it’s how we contain the many dimensions into a single value. This value represents momentum.</p>
+<p>This might be overly simplistic, but if this is a new concept or not intuitive this idea might help. Imagine how you think of a bicycle in motion. As it goes from point A to point B its speed changes slightly. A “gradient” is a way of describing, in a single value, how the speed changed over time as the bicycle went from point A to point B.</p>
+<p>We’ll plot what this looks like after we’ve done the training so it makes more sense.</p>
+<div id="relu" class="section level4">
+<h4>Relu</h4>
+<p>Relu performs operations on each entry of the tensors being considered and takes the maximum value.</p>
+<p>Transformation happens with the following formula: <code>output = relu(dot(W, input) + b)</code></p>
+<p>What are the pieces?</p>
+<ul>
+<li>output = resulting tensor (what the layer function returns)</li>
+<li>input = incoming tensor, either what we start with or the result of the last layer function</li>
+<li>“W” and “b” are Weights</li>
+<li>W = kernel</li>
+<li>b = bias</li>
+</ul>
+<p>By “weights” we mean the features that affect the output, or in our case the probability that our image matches a particular label. The goal of our model is to pick out the features within the image data that appear to be tied to a matching label so it can tell us with a high degree of certainty whether an image contains a particular number.</p>
+<p>Initially these are random but future iterations will adjust based on the result of a feedback function we’ll discuss in the next section.</p>
+<p>Here’s an example of what relu looks like under the hood</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">basic_relu &lt;-<span class="st"> </span><span class="cf">function</span>(my_2d_tensor) {
+  <span class="cf">for</span> (row <span class="cf">in</span> <span class="kw">nrow</span>(my_2d_tensor)) {
+    <span class="cf">for</span> (column <span class="cf">in</span> <span class="kw">ncol</span>(my_2d_tensor)) {
+      <span class="co"># the individual entry</span>
+      my_2d_tensor[row, column] &lt;-<span class="st"> </span><span class="kw">max</span>(my_2d_tensor[row, column], <span class="dv">0</span>)
+      
+    }
+  }
+}</code></pre></div>
+</div>
+<div id="the-final-transformation" class="section level4">
+<h4>The Final Transformation</h4>
+<p>The final layer uses a different transformation than the rest of them. This is our “last layer activation” and it transforms the model representation into something that we can use to answer our question.</p>
+<p>We are using <code>softmax</code> because it goes with the <code>categorical_crossentropy</code> loss function.</p>
+<p>The type activation you use at this point is dictated by the type of question your experiment is exploring!</p>
+</div>
+</div>
+<div id="compile" class="section level3">
+<h3>Compile</h3>
+<p>What does it mean to compile a model? What does compile actually do?</p>
+<p>R’s keras is an interface to the Python library, so the model is not fully “stored” in R. Compile sets additional attributes in the Python representation of the model. Anytime you change a model attribute you must run compile to update the Python representation of the model or else the changes won’t be reflected when you go to train it.</p>
+<p>The model needs three things before we can train it:</p>
+<ol style="list-style-type: decimal">
+<li>how it will measure its performance as it trains</li>
+<li>what it will measure ^^</li>
+<li>how it will update itself in response to its measure of its own performance</li>
+</ol>
+<p>Note that you can specify these when you initialize the model above, there is no need to separate them. It’s just done so here because a) the thing I’m referencing did it and b) to break it up conceptually for teaching.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">compile</span>(
+  <span class="dt">optimizer =</span> <span class="st">&quot;rmsprop&quot;</span>,
+  <span class="dt">loss =</span> <span class="st">&quot;categorical_crossentropy&quot;</span>,
+  <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">&quot;accuracy&quot;</span>)
+)</code></pre></div>
+</div>
+<div id="optimizer" class="section level3">
+<h3>Optimizer</h3>
+<p>The optimizer determines the rate at which the model learns. You can see a list of available optimizers in R keras by searching the Help for “optimizer_”.</p>
+<p>We’ll use <code>RMSProp</code></p>
+</div>
+<div id="loss-function" class="section level3">
+<h3>Loss Function</h3>
+<p><code>categorical_crossentropy</code> is the loss function used as the feedback signal for learning the weight tensors. This method is used when each sample (or image in this case) has exactly one class it can belong to. That is, in our set, an image can only be ONE of the 9 digits, it can’t be both. The loss function you use will be dictated by the nature of your question!</p>
+</div>
+<div id="metrics" class="section level3">
+<h3>Metrics</h3>
+<p>We’re going to use “accuracy”. Accuracy tells us what proportion of predictions our model got right. Error rate is another popular one (essentially what proportion it got wrong).</p>
+</div>
+<div id="setting-something-aside" class="section level3">
+<h3>Setting Something Aside</h3>
+<p>Before you train your model on your dataset, you should to put some of your data aside for the validation process. Our dataset already includes a test set, so we’ll use that for now.</p>
+<p>You can think of this as a control group. The attributes we specified above will also be used on this “pristine” set of data the model has never encountered before. We’ll show what that looks like after the training step has occurred.</p>
+<p>There are different approaches to validation and not all of them require setting some data aside, because sometimes you can’t. We’ll touch on that when we show the results of the testing process after the training step!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test_images &lt;-<span class="st"> </span>mnist<span class="op">$</span>test<span class="op">$</span>x
+test_images &lt;-<span class="st"> </span><span class="kw">array_reshape</span>(test_images, <span class="kw">c</span>(<span class="dv">10000</span>, <span class="dv">28</span> <span class="op">*</span><span class="st"> </span><span class="dv">28</span>))
+test_images &lt;-<span class="st"> </span>test_images <span class="op">/</span><span class="st"> </span><span class="dv">255</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test_labels &lt;-<span class="st"> </span>mnist<span class="op">$</span>test<span class="op">$</span>y
+test_labels &lt;-<span class="st"> </span><span class="kw">to_categorical</span>(test_labels)</code></pre></div>
+</div>
+<div id="so-what-have-we-got" class="section level3">
+<h3>So What Have We Got?</h3>
+<p>The model we’ve built is a small convnet. It is a stack of alternated 2d layers with relu activation.</p>
+<p>By default the model will print layer metadata.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model</code></pre></div>
+<pre><code>Model
+___________________________________________________________________________
+Layer (type)                     Output Shape                  Param #     
+===========================================================================
+image (Dense)                    (None, 512)                   401920      
+___________________________________________________________________________
+prediction (Dense)               (None, 10)                    5130        
+===========================================================================
+Total params: 407,050
+Trainable params: 407,050
+Non-trainable params: 0
+___________________________________________________________________________</code></pre>
+<p>To see a layer, we can call it by name.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_layer</span>(model, <span class="dt">name=</span><span class="st">&quot;image&quot;</span>)</code></pre></div>
+<p>We can also get the weights.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_weights</span>(model)</code></pre></div>
+<p>More information on saving your model to a text file is discussed further on.</p>
+</div>
+</div>
+<div id="train" class="section level2">
+<h2>Train</h2>
+<p>What is the probability that the image belongs to one of the 10 different categories?</p>
+<p>The <code>fit()</code> function is how we’ll trigger the training loop. It trains model for fixed number of iterations and it returns a “history” object with all info collected during training.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">history &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">fit</span>(train_images, train_labels, <span class="dt">epochs =</span> <span class="dv">5</span>, <span class="dt">batch_size =</span> <span class="dv">128</span>)</code></pre></div>
+<div id="the-training-loop" class="section level3">
+<h3>The Training Loop</h3>
+<ol style="list-style-type: decimal">
+<li>Get a batch of images and the corresponding labels</li>
+<li>Run the layer function on the images to obtain predictions on whether the image matches the label</li>
+<li>Compute the loss by looking at the rate of mismatch between the image and the label</li>
+<li>Update the weights (how things are interconnected/related) to reduce the loss</li>
+</ol>
+</div>
+<div id="saving-the-model" class="section level3">
+<h3>Saving the Model</h3>
+<p>There are many ways to save your model. It’s usually a good idea to save it after training for evaluation. You can also include it in your Github repo where you’ve saved your research notebook!</p>
+<p>You can save it in human-readable form using either YAML or JSON.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">write</span>(<span class="kw">model_to_yaml</span>(model), <span class="st">&quot;models/mnist_dense.yaml&quot;</span>)</code></pre></div>
+<p>The human-readable options for serializing the models don’t include all of the information. The serialize_model command actually calls the Keras Python library to get the data that is not immediately available within the R objects.</p>
+<p>All options are not included by default, however, such as the optimizer. You need to explicitely indicate what additional attributes you want included. When might this be useful?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">raw_model &lt;-<span class="st"> </span>model
+<span class="kw">write</span>(<span class="kw">serialize_model</span>(raw_model), <span class="st">&quot;models/mnist_raw.txt&quot;</span>)</code></pre></div>
+<p>You can also explicitely save it as HDF5</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">save_model_hdf5</span>(model, <span class="dt">filepath =</span> <span class="st">&quot;models/mnist_dense_hdf5.h5&quot;</span>)
+<span class="kw">save_model_weights_hdf5</span>(model, <span class="dt">filepath=</span><span class="st">&quot;models/mnist_dense_weights_hdf5.h5&quot;</span>)</code></pre></div>
+<p>The next section, Reproducibility, shows how to export your model as a TensorFlow SavedModel for deployment.</p>
+</div>
+</div>
+<div id="validation" class="section level2">
+<h2>Validation</h2>
+<div id="test-data" class="section level3">
+<h3>Test Data</h3>
+<p>You typically don’t want to test your model on the same data its already been trained on. You can think of this as the “control group”. That said, there are methods that can be used when the test set and the training set overlap or are the same.</p>
+<div id="set-some-data-aside" class="section level4">
+<h4>Set Some Data Aside</h4>
+<p>In this case, the dataset already had samples set aside for testing. We’ll talk about this later, but just know that depending on your testing method, you might need to pull out some samples before your training run.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metrics &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">evaluate</span>(test_images, test_labels, <span class="dt">verbose =</span> <span class="dv">0</span>)
+
+metrics</code></pre></div>
+<pre><code>$loss
+[1] 0.06991126
+
+$acc
+[1] 0.9786</code></pre>
+</div>
+</div>
+<div id="visualizing-the-results" class="section level3">
+<h3>Visualizing the results</h3>
+<p>This plot shows the curve of loss and the accuracy during training</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># no lines on the plot for some reason</span>
+<span class="kw">plot</span>(history)</code></pre></div>
+<p><img src="img/unnamed-chunk-17-1.png" width="576" /></p>
+</div>
+</div>
+<div id="run-the-example" class="section level2">
+<h2>Run the Example</h2>
+<p>Here are all the steps in one code chunk. Challenge - write comments describing what each line does.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
+
+mnist &lt;-<span class="st"> </span><span class="kw">dataset_mnist</span>()
+train_images &lt;-<span class="st"> </span>mnist<span class="op">$</span>train<span class="op">$</span>x
+train_labels &lt;-<span class="st"> </span>mnist<span class="op">$</span>train<span class="op">$</span>y
+test_images &lt;-<span class="st"> </span>mnist<span class="op">$</span>test<span class="op">$</span>x
+test_labels &lt;-<span class="st"> </span>mnist<span class="op">$</span>test<span class="op">$</span>y
+
+model &lt;-<span class="st"> </span><span class="kw">keras_model_sequential</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">layer_dense</span>(<span class="dt">units =</span> <span class="dv">512</span>, <span class="dt">activation =</span> <span class="st">&quot;relu&quot;</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">28</span> <span class="op">*</span><span class="st"> </span><span class="dv">28</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">layer_dense</span>(<span class="dt">units =</span> <span class="dv">10</span>, <span class="dt">activation =</span> <span class="st">&quot;softmax&quot;</span>)
+
+model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">compile</span>(
+  <span class="dt">optimizer =</span> <span class="st">&quot;rmsprop&quot;</span>,
+  <span class="dt">loss =</span> <span class="st">&quot;categorical_crossentropy&quot;</span>,
+  <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">&quot;accuracy&quot;</span>)
+)
+
+train_images &lt;-<span class="st"> </span><span class="kw">array_reshape</span>(train_images, <span class="kw">c</span>(<span class="dv">60000</span>, <span class="dv">28</span> <span class="op">*</span><span class="st"> </span><span class="dv">28</span>))
+train_images &lt;-<span class="st"> </span>train_images <span class="op">/</span><span class="st"> </span><span class="dv">255</span>
+
+test_images &lt;-<span class="st"> </span><span class="kw">array_reshape</span>(test_images, <span class="kw">c</span>(<span class="dv">10000</span>, <span class="dv">28</span> <span class="op">*</span><span class="st"> </span><span class="dv">28</span>))
+test_images &lt;-<span class="st"> </span>test_images <span class="op">/</span><span class="st"> </span><span class="dv">255</span>
+
+train_labels &lt;-<span class="st"> </span><span class="kw">to_categorical</span>(train_labels)
+test_labels &lt;-<span class="st"> </span><span class="kw">to_categorical</span>(test_labels)
+
+metrics &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">evaluate</span>(test_images, test_labels, <span class="dt">verbose =</span> <span class="dv">0</span>)
+
+history &lt;-<span class="st"> </span>model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">fit</span>(train_images, train_labels, <span class="dt">epochs =</span> <span class="dv">5</span>, <span class="dt">batch_size =</span> <span class="dv">128</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># not sure why lines aren&#39;t showing up in the plot :/</span>
+
+<span class="kw">plot</span>(history)</code></pre></div>
+<p><img src="img/unnamed-chunk-19-1.png" width="576" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metrics</code></pre></div>
+<pre><code>$loss
+[1] 2.385136
+
+$acc
+[1] 0.1337</code></pre>
+</div>
+<div id="predicting-the-outcomes" class="section level2">
+<h2>Predicting the Outcomes</h2>
+<p>So, how did we do? Did our model successfully identify the numbers?</p>
+<p>In R, it is easy to make predictions using the the trained model and R’s predict function. Each row represents an image, each column represents a digit from 0-9, and the values represent the model’s prediction.</p>
+<p>To make this easier to read, we’ve used the tidyverse to summarize the data using the maximum probability for each digit. This only looks at the maximum probability, what alternative approaches could we use for more complex predictions?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">preds &lt;-<span class="st"> </span><span class="kw">predict</span>(model, test_images)
+preds_df &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(preds)
+<span class="kw">names</span>(preds_df) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">9</span>) <span class="co"># wasn&#39;t working in the data.frame cast for some reason</span>
+
+predictions &lt;-<span class="st"> </span>preds_df <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">digit_index =</span> <span class="kw">row_number</span>()) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather</span>(number, probability, <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)
+
+predictions_summary &lt;-<span class="st"> </span>predictions <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(digit_index) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">likely_number =</span> number[<span class="kw">which.max</span>(probability)])</code></pre></div>
+<p>Let’s look at a random sample of images to see how our predictions did. Do you see any where the predicted value does not match the image? How might you show the top probabilities overall?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">predictions_summary_sample &lt;-<span class="st"> </span><span class="kw">sample_n</span>(predictions_summary, <span class="dv">24</span>)
+
+<span class="cf">for</span> (n <span class="cf">in</span> predictions_summary_sample<span class="op">$</span>digit_index) {
+  pred_img &lt;-<span class="st"> </span>mnist<span class="op">$</span>test<span class="op">$</span>x[n,,]
+  <span class="kw">plot</span>(<span class="kw">as.raster</span>(pred_img, <span class="dt">max=</span><span class="dv">255</span>))
+  <span class="kw">title</span>(<span class="kw">paste</span>(<span class="st">&quot;Predicted number for index&quot;</span>, n, <span class="st">&quot;:&quot;</span>, predictions_summary<span class="op">$</span>likely_number[n]))
+}</code></pre></div>
+<p><img src="img/unnamed-chunk-22-1.png" width="576" /><img src="img/unnamed-chunk-22-2.png" width="576" /><img src="img/unnamed-chunk-22-3.png" width="576" /><img src="img/unnamed-chunk-22-4.png" width="576" /><img src="img/unnamed-chunk-22-5.png" width="576" /><img src="img/unnamed-chunk-22-6.png" width="576" /><img src="img/unnamed-chunk-22-7.png" width="576" /><img src="img/unnamed-chunk-22-8.png" width="576" /><img src="img/unnamed-chunk-22-9.png" width="576" /><img src="img/unnamed-chunk-22-10.png" width="576" /><img src="img/unnamed-chunk-22-11.png" width="576" /><img src="img/unnamed-chunk-22-12.png" width="576" /><img src="img/unnamed-chunk-22-13.png" width="576" /><img src="img/unnamed-chunk-22-14.png" width="576" /><img src="img/unnamed-chunk-22-15.png" width="576" /><img src="img/unnamed-chunk-22-16.png" width="576" /><img src="img/unnamed-chunk-22-17.png" width="576" /><img src="img/unnamed-chunk-22-18.png" width="576" /><img src="img/unnamed-chunk-22-19.png" width="576" /><img src="img/unnamed-chunk-22-20.png" width="576" /><img src="img/unnamed-chunk-22-21.png" width="576" /><img src="img/unnamed-chunk-22-22.png" width="576" /><img src="img/unnamed-chunk-22-23.png" width="576" /><img src="img/unnamed-chunk-22-24.png" width="576" /></p>
+</div>
+<div id="conclusion" class="section level2">
+<h2>Conclusion</h2>
+<p>We were able to successfully recognize single digits from handwriting! But more importantly, we did some derp learning, making us slightly less derpy learners ;)</p>
+</div>
+<div id="next-steps" class="section level2">
+<h2>Next Steps</h2>
+<ul>
+<li>Figure out better ways to visualize prediction</li>
+<li>Use 2d convnet instead of dense (p112 in Deep Learning with R)</li>
+<li>Visualize the stages of the convnet visualization (see example 5.3 in Deep Learning with R)</li>
+</ul>
+</div>
+<div id="deepen-your-learning" class="section level2">
+<h2>Deepen your Learning</h2>
+<ul>
+<li><a href="https://www.manning.com/books/deep-learning-with-r">Deep Learning with R by JJ Allaire</a></li>
+<li><a href="https://github.com/jjallaire/deep-learning-with-r-notebooks">Deep Learning with R Examples</a></li>
+<li><a href="https://medium.com/machine-learning-for-humans/why-machine-learning-matters-6164faf1df12">Machine Learning for Humans</a></li>
+<li><a href="https://tensorflow.rstudio.com/">Tensorflow Tools for R by RStudio</a></li>
+<li><a href="https://www.datacamp.com/courses/machine-learning-with-tree-based-models-in-r">Erin &amp; Gabi’s Intro to Machine Learning Course on DataCamp</a></li>
+<li><a href="https://www.fast.ai/">Fast.ai Courses, note: these are taught in Python</a></li>
+</ul>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p><a href="http://guides.lib.umich.edu/c.php?g=439304&amp;p=2993299">Per APA Guildelines</a><a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>not to be confused with convents, totally different thing… that was a joke ;)<a href="#fnref2">↩</a></p></li>
+</ol>
+</div>
+</div>
+
+
+    </div>
+    <div class="col-md-2">
+            <div id="toc">
+      	<button type="button" class="close">×</button>
+        <ul>
+        <li><a href="#library">Library</a></li>
+        <li><a href="#the-question">The Question</a></li>
+        <li><a href="#the-data---mnist-database">The Data - MNIST database</a></li>
+        <li><a href="#data-format">Data Format</a></li>
+        <li><a href="#data-encoding">Data Encoding</a></li>
+        <li><a href="#the-model-aka-network">The Model (aka Network)</a></li>
+        <li><a href="#train">Train</a></li>
+        <li><a href="#validation">Validation</a></li>
+        <li><a href="#run-the-example">Run the Example</a></li>
+        <li><a href="#predicting-the-outcomes">Predicting the Outcomes</a></li>
+        <li><a href="#conclusion">Conclusion</a></li>
+        <li><a href="#next-steps">Next Steps</a></li>
+        <li><a href="#deepen-your-learning">Deepen your Learning</a></li>
+        </ul>
+      </div>
+          </div>
+  </div>
+</div>
+
+<script>
+$(document).ready(function () {
+
+  // add bootstrap table styles to pandoc tables
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+
+});
+</script>
+
+<script>
+$(document).ready(function () {
+ 	    $('#content img')
+ 	  .addClass("image-lb");
+  $('#content').magnificPopup({
+	      type:'image',
+	      closeOnContentClick: false,
+	      closeBtnInside: false,
+	      delegate: 'img',
+	      gallery: {enabled: false },
+	      image: {
+	        verticalFit: true,
+          titleSrc: 'alt'
+	      }
+ 	    });
+ 	});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="fluid-row"><p align="center"><a href="https://github.com/missaugustina/RhappyFUNblog/blob/master/site/blog/hello-keras/hello-keras.Rmd">This post is available as Rmarkdown on Github</a></p></div></body>
+</html>
